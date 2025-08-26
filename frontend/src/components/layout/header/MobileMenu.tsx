@@ -34,7 +34,7 @@ export default function MobileMenu() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
-    }
+    };
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -91,6 +91,9 @@ export default function MobileMenu() {
       >
         <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4 bg-white">
           <Logo />
+          <a href="/login" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-md shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center text-sm py-1.5 px-3">
+            Вход
+          </a>
         </div>
 
         <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
@@ -108,12 +111,6 @@ export default function MobileMenu() {
             </a>
           ))}
         </nav>
-
-        <div class="p-4 mt-auto border-t border-gray-200 bg-white">
-            <a href="/login" class="w-full block text-center bg-cyan-600 text-white font-bold py-3 px-6 rounded-full hover:bg-cyan-700 transition-all duration-300 ease-in-out transform hover:-translate-y-px hover:shadow-lg hover:shadow-cyan-500/50">
-                Вход
-            </a>
-        </div>
       </div>
     </>
   );
