@@ -1,0 +1,26 @@
+---
+// src/components/hero/HeroBackground.astro
+// Отвечает за фоновый паттерн и анимированные линии.
+---
+<!-- Фоновый паттерн -->
+<div class="absolute inset-0 opacity-5">
+  <div class="absolute inset-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMwIDBDMzMuMzEzNyAwIDM2IDIuNjg2MjkgMzYgNlY1NEE2IDYgMCAwIDEgMzAgNjBDMjYuNjg2MyA2MCAyNCA1Ny4zMTM3IDI0IDU0VjZDMjQgMi42ODYyOSAyNi42ODYzIDAgMzAgMFoiIGZpbGw9IiMzYjhmZjkiLz4KPC9zdmc+');"></div>
+</div>
+
+<!-- Анимированные линии -->
+<div class="absolute inset-0">
+  <div class="absolute top-1/4 left-1/4 w-px h-32 bg-cyan-500/30 transform rotate-45 animate-pulse"></div>
+  <div class="absolute top-1/3 right-1/3 w-px h-24 bg-blue-500/30 transform -rotate-12 animate-pulse animation-delay-1000"></div>
+  <div class="absolute bottom-1/4 left-1/3 w-px h-28 bg-indigo-500/30 transform rotate-12 animate-pulse animation-delay-2000"></div>
+</div>
+
+<style>
+    /* Стили, специфичные для этого компонента, инкапсулированы здесь */
+    .animation-delay-1000 {
+        animation-delay: 1s;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+</style>

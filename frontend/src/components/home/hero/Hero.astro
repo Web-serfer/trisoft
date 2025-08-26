@@ -1,0 +1,15 @@
+---
+import HeroBackground from './HeroBackground.astro';
+import HeroContent from './HeroContent.astro';
+import HeroStatsCard from './HeroStatsCard.astro';
+---
+<section class="relative min-h-screen flex items-center bg-slate-900 overflow-hidden">
+  <HeroBackground />
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
+      <HeroContent />
+      <HeroStatsCard />
+    </div>
+  </div>
+</section>
