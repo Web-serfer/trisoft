@@ -3,7 +3,6 @@ import { useState, useEffect, useCallback } from "preact/hooks";
 import { menus } from "./navData";
 import { isModalOpen } from "@stores/modalStore";
 
-// Re-implemented Logo component for Preact
 function Logo() {
   return (
     <a href="/" class="flex flex-col items-center no-underline">
@@ -26,6 +25,10 @@ function Logo() {
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -37,19 +40,23 @@ export default function MobileMenu() {
     };
   }, [isOpen]);
 
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, handleClose]);
 
   const handleCallbackClick = () => {
     setIsOpen(false);
     isModalOpen.set(true);
-  };
-
-  const handleOverlayKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      handleClose();
-    }
   };
 
   const buttonClass = isOpen
@@ -71,39 +78,38 @@ export default function MobileMenu() {
         )}
       </button>
 
-      <div
-        role="button"
-        tabIndex={isOpen ? 0 : -1}
-        class={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      <button
+        type="button"
+        class={`fixed inset-0 z-40 w-full h-full bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
         onClick={handleClose}
-        onKeyDown={handleOverlayKeyDown}
         aria-label="Закрыть меню"
+        tabIndex={-1}
       />
 
       <div
-        class={`fixed bottom-0 left-0 top-0 z-50 flex h-screen w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} `}
+        class={`fixed bottom-0 left-0 top-0 z-50 flex h-screen w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4 bg-white">
           <Logo />
         </div>
 
-        <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white">
-          {menus.map((menu, index) => (
+        <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
+          {menus.map((menu) => (
             <a
-              key={menu.url}
+              key={menu.url} // Уникальный URL - отличный ключ для навигации
               onClick={handleClose}
               href={menu.url}
               class={`block transform text-center text-xl font-medium text-gray-600 transition-all duration-300 ease-out hover:text-cyan-600 ${
                 isOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-              } `}
-              style={{ transitionDelay: `${100 + index * 75}ms` }}
+              }`}
+              style={{ transitionDelay: `${100 + menus.indexOf(menu) * 75}ms` }}
             >
               {menu.name}
             </a>
           ))}
         </nav>
 
-        <div class="p-4 mt-auto space-y-4 bg-white">
+        <div class="p-4 mt-auto border-t border-gray-200 bg-white">
             <a href="/login" class="w-full block text-center bg-cyan-600 text-white font-bold py-3 px-6 rounded-full hover:bg-cyan-700 transition-all duration-300 ease-in-out transform hover:-translate-y-px hover:shadow-lg hover:shadow-cyan-500/50">
                 Вход
             </a>
