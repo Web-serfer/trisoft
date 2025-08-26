@@ -1,17 +1,33 @@
 ---
 import '@styles/global.css'
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = Astro.url.href;
+
+const siteName = "Trisoft.ru";
+const finalTitle = `${title} | ${siteName}`;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>Главная страница | Trisoft.ru</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <title>{finalTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+</head>
+<body>
+  <main>
+    <slot />
+  </main>
+</body>
+</html>

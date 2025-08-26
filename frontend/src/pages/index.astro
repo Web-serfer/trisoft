@@ -1,8 +1,16 @@
 ---
 import Layout from '@layouts/Layout.astro';
+
+const pageTitle = "Главная страница";
+const pageDescription = "Trisoft - профессиональная разработка программного обеспечения, веб-сайтов и IT-решений для вашего бизнеса с использованием Astro и Payload CMS.";
 ---
 
-<Layout>
-	<h2 class="text-center text-2xl font-bold mt-10">Приветствуем Вас на главной странице портала - Trisoft !!!</h2>
-    <p class="text-center font-semibold">Проект создается с помощью фреймворка Astro и  Payload CMS</p>
+<Layout title={pageTitle} description={pageDescription}>
+
+  <!-- Этот контент будет вставлен в <slot /> макета -->
+  <main class="container mx-auto px-4">
+    <h2 class="text-center text-2xl font-bold mt-10">Приветствуем Вас на главной странице портала - Trisoft !!</h2>
+    <p class="text-center font-semibold mt-2">Проект создается с помощью фреймворка Astro и Payload CMS</p>
+  </main>
+
 </Layout>
