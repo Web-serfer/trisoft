@@ -1,17 +1,20 @@
 ---
-// В этой секции можно определить переменные и логику
+import Logo from '../header/Logo.astro';
 const currentYear = new Date().getFullYear();
 const companyName = "ООО «Трисофт»";
 
-// Массив ссылок для удобного управления
-const navLinks = [
+const primaryLinks = [
   { href: "/about", text: "О компании" },
-  { href: "/services", text: "Услуги" },
-  { href: "/portfolio", text: "Портфолио" },
   { href: "/contacts", text: "Контакты" },
 ];
 
-// Массив социальных сетей
+const serviceLinks = [
+  { href: "/services/development", text: "Разработка 1С" },
+  { href: "/services/implementation", text: "Внедрение" },
+  { href: "/services/support", text: "Сопровождение" },
+  { href: "/services/outsource", text: "Аутсорс/аутстафф" },
+];
+
 const socialLinks = [
   { href: "https://vk.com", label: "VKontakte", icon: "vk" },
   { href: "https://t.me", label: "Telegram", icon: "telegram" },
@@ -19,163 +22,64 @@ const socialLinks = [
 ];
 ---
 
-<footer class="site-footer">
-  <div class="footer-container">
+<footer class="bg-gray-900 text-gray-300 pt-12 pb-8">
+  <div class="max-w-[1440px] mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
 
-    <!-- Колонка 1: О компании -->
-    <div class="footer-column about">
-      <h3 class="footer-title">{companyName}</h3>
-      <p>Ведущий разработчик программного обеспечения и системный интегратор. Мы создаем будущее сегодня.</p>
+    <!-- About Column -->
+    <div class="md:col-span-1">
+      <div class="footer-logo-container mb-4">
+        <Logo />
+      </div>
+      <p class="text-sm text-gray-400 leading-relaxed">Ведущий разработчик программного обеспечения и системный интегратор.</p>
     </div>
 
-    <!-- Колонка 2: Навигация -->
-    <div class="footer-column links">
-      <h3 class="footer-title">Навигация</h3>
-      <ul>
-        {navLinks.map(link => (
-            <li><a href={link.href}>{link.text}</a></li>
+    <!-- Services Column -->
+    <div>
+      <h3 class="text-lg font-bold text-white mb-4">Услуги</h3>
+      <ul class="space-y-2">
+        {serviceLinks.map(link => (
+          <li><a href={link.href} class="hover:text-cyan-400 transition-colors duration-300">{link.text}</a></li>
         ))}
       </ul>
     </div>
 
-    <!-- Колонка 3: Контакты и Соцсети -->
-    <div class="footer-column social">
-      <h3 class="footer-title">Свяжитесь с нами</h3>
-      <div class="social-icons">
+    <!-- Navigation Column -->
+    <div>
+      <h3 class="text-lg font-bold text-white mb-4">Навигация</h3>
+      <ul class="space-y-2">
+        {primaryLinks.map(link => (
+          <li><a href={link.href} class="hover:text-cyan-400 transition-colors duration-300">{link.text}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Contacts Column -->
+    <div>
+      <h3 class="text-lg font-bold text-white mb-4">Свяжитесь с нами</h3>
+      <div class="flex space-x-4 mb-4">
         {socialLinks.map(social => (
-            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
-              <!-- Иконки SVG -->
-              {social.icon === 'vk' && <svg ... >...</svg> <!-- SVG-код для VK --> }
-              {social.icon === 'telegram' && <svg ... >...</svg> <!-- SVG-код для Telegram --> }
-              {social.icon === 'email' && <svg ... >...</svg> <!-- SVG-код для Email --> }
-            </a>
+          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} class="hover:text-cyan-400 transition-colors duration-300">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">/* SVG path */</svg>
+          </a>
         ))}
       </div>
-      <p class="contact-info">
-        <a href="tel:+74951234567">+7 (495) 123-45-67</a><br/>
-        <a href="mailto:info@trisoft.ru">info@trisoft.ru</a>
-      </p>
+      <div class="text-sm">
+        <a href="tel:+74951234567" class="hover:text-cyan-400 transition-colors duration-300">+7 (495) 123-45-67</a><br/>
+        <a href="mailto:info@trisoft.ru" class="hover:text-cyan-400 transition-colors duration-300">info@trisoft.ru</a>
+      </div>
     </div>
 
   </div>
 
-  <!-- Нижняя строка с копирайтом -->
-  <div class="footer-bottom">
+  <!-- Bottom Bar -->
+  <div class="max-w-[1440px] mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
     <p>&copy; {currentYear} {companyName}. Все права защищены.</p>
   </div>
 </footer>
 
-<!-- Встроенные SVG-иконки для простоты -->
-<div hidden>
-  <svg id="icon-vk" viewBox="0 0 24 24" ...>...</svg>
-  <svg id="icon-telegram" viewBox="0 0 24 24" ...>...</svg>
-  <svg id="icon-email" viewBox="0 0 24 24" ...>...</svg>
-</div>
-
-<!-- Чтобы не перегружать код, я покажу, как использовать SVG -->
-<!-- Пример для иконки Telegram (вставьте реальные SVG-коды) -->
-<template id="telegram-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="m22 2-11 11"/></svg>
-</template>
-
-
 <style>
-    .site-footer {
-        background-color: #2c3e50; /* Темно-синий фон */
-        color: #ecf0f1; /* Светлый текст */
-        padding: 40px 20px;
-        font-size: 16px;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        gap: 30px;
-        flex-wrap: wrap; /* Позволяет колонкам переноситься на новую строку на маленьких экранах */
-    }
-
-    .footer-column {
-        flex: 1;
-        min-width: 250px; /* Минимальная ширина колонки */
-    }
-
-    .footer-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        color: #ffffff;
-    }
-
-    .footer-column p {
-        line-height: 1.6;
-        color: #bdc3c7; /* Чуть более тусклый цвет для параграфов */
-    }
-
-    .footer-column ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .footer-column li {
-        margin-bottom: 10px;
-    }
-
-    .footer-column a {
-        color: #ecf0f1;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .footer-column a:hover {
-        color: #3498db; /* Яркий цвет при наведении */
-        text-decoration: underline;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 15px;
-    }
-
-    .social-icons a {
-        display: inline-block;
-    }
-
-    .social-icons a svg {
-        width: 24px;
-        height: 24px;
-        fill: #ecf0f1;
-        transition: fill 0.3s ease;
-    }
-
-    .social-icons a:hover svg {
-        fill: #3498db; /* Яркий цвет при наведении */
-    }
-
-    .contact-info {
-        font-style: normal;
-    }
-
-    .footer-bottom {
-        text-align: center;
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #34495e; /* Разделитель */
-        color: #bdc3c7;
-    }
-
-    /* Адаптивность для мобильных устройств */
-    @media (max-width: 768px) {
-        .footer-container {
-            flex-direction: column; /* Колонки выстраиваются в столбец */
-            align-items: center;
-            text-align: center;
-        }
-        .social-icons {
-            justify-content: center;
-        }
-    }
+  .footer-logo-container {
+    transform: scale(0.8);
+    transform-origin: left;
+  }
 </style>

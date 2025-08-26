@@ -2,9 +2,10 @@
 import Logo from './Logo.astro';
 import Navbar from './Navbar.astro';
 import MobileMenu from './MobileMenu.tsx';
+import Modal from '@components/base/Modal.tsx';
 ---
 
-<header id="header" class="sticky top-0 z-50 w-full h-20 bg-slate-800 shadow-lg">
+<header id="header" class="sticky top-0 z-50 w-full h-20 bg-gray-900 shadow-lg">
   <div
     id="header-container"
     class="relative h-full max-w-[1440px] px-4 mx-auto transition-all duration-300"
@@ -17,9 +18,9 @@ import MobileMenu from './MobileMenu.tsx';
         </nav>
       </div>
       <div class="hidden lg:flex flex-none">
-        <a href="/contact" class="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+        <button id="callback-button" type="button" class="px-4 py-2 text-white bg-cyan-600 rounded-md hover:bg-cyan-700 hover:cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-px hover:shadow-lg hover:shadow-cyan-500/50">
           Заказать звонок
-        </a>
+        </button>
       </div>
       <div class="lg:hidden">
         <MobileMenu client:load />
@@ -27,3 +28,13 @@ import MobileMenu from './MobileMenu.tsx';
     </div>
   </div>
 </header>
+
+<Modal client:load />
+
+<script>
+  import { isModalOpen } from '@stores/modalStore';
+
+  document.getElementById('callback-button').addEventListener('click', () => {
+    isModalOpen.set(true);
+  });
+</script>
