@@ -14,15 +14,19 @@ export const menus = [
     ],
   },
   {
+    name: "Блог",
+    url: "/blog",
+  },
+  {
     name: "Цены",
     url: "/prices",
   },
   {
-    name: "Контакты",
-    url: "/contacts",
-  },
-  {
     name: "О Компании",
     url: "/about",
+  },
+  {
+    name: "Контакты",
+    url: "/contacts",
   },
 ];

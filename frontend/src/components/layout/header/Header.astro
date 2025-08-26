@@ -5,7 +5,7 @@ import MobileMenu from './MobileMenu.tsx';
 import Modal from '@components/base/Modal.tsx';
 ---
 
-<header class="sticky top-0 z-50 w-full h-20">
+<header id="main-header" class="sticky top-0 z-50 w-full h-20">
   <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300">
     <div class="container mx-auto h-full px-4">
       <div class="flex items-center justify-between h-full select-none">
@@ -30,24 +30,39 @@ import Modal from '@components/base/Modal.tsx';
 
 <Modal client:load />
 
+<style>
+  @keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #main-header {
+    animation: fade-in-down 0.8s ease-out forwards;
+  }
+</style>
+
 <script>
   const headerInnerContainer = document.getElementById('header-inner-container');
+  // The scroll handler is now simplified to always keep the header opaque
   const scrollHandler = () => {
-    if (window.scrollY > 20) {
-      headerInnerContainer.classList.remove('bg-white', 'shadow-sm');
-      headerInnerContainer.classList.add('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
-    } else {
-      headerInnerContainer.classList.add('bg-white', 'shadow-sm');
-      headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
-    }
+    // Ensure the header always has the default opaque classes
+    headerInnerContainer.classList.add('bg-white', 'shadow-sm');
+    headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
   };
 
   window.addEventListener('scroll', scrollHandler);
 
-  // Cleanup the event listener when the component is unmounted
+  // Run on page load to ensure correct initial state
   document.addEventListener('astro:page-load', () => {
-    scrollHandler(); // Run on page load
+    scrollHandler(); 
   });
+  // Cleanup the event listener when the component is unmounted
   document.addEventListener('astro:before-swap', () => {
       window.removeEventListener('scroll', scrollHandler)
   })
