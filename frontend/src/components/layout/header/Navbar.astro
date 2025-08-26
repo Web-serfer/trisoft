@@ -9,7 +9,7 @@ import { menus } from './navData.ts';
         <>
           <a
             href={menu.url}
-            class="flex items-center gap-x-1 px-3 py-2 font-medium tracking-wide text-gray-600 duration-200 ease-out hover:text-cyan-600"
+            class="flex items-center gap-x-1 px-3 py-2 font-medium tracking-wide text-gray-600 duration-200 ease-out hover:text-blue-500"
           >
             {menu.name}
             <svg class="w-4 h-4 fill-current transform transition-transform duration-300 group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -21,7 +21,7 @@ import { menus } from './navData.ts';
               {menu.children.map((child) => (
                 <a
                   href={child.url}
-                  class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-cyan-600"
+                  class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-blue-500"
                 >
                   {child.name}
                 </a>
@@ -32,10 +32,10 @@ import { menus } from './navData.ts';
       ) : (
         <a
           href={menu.url}
-          class="group relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto text-gray-600 hover:text-cyan-600"
+          class="group relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto text-gray-600 hover:text-blue-500"
         >
           {menu.name}
-          <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-600 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
+          <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
         </a>
       )}
     </div>
@@ -44,6 +44,6 @@ import { menus } from './navData.ts';
 
 <style>
   a.active {
-    color: #0891B2; /* cyan-600 */
+    color: #3D6BFF; /* blue-500 */
   }
 </style>
