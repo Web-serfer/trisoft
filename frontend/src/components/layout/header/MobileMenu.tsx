@@ -81,13 +81,13 @@ export default function MobileMenu() {
       />
 
       <div
-        class={`fixed bottom-0 left-0 top-0 z-50 flex h-full w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} `}
+        class={`fixed bottom-0 left-0 top-0 z-50 flex h-screen w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} `}
       >
-        <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4">
+        <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4 bg-white">
           <Logo />
         </div>
 
-        <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8">
+        <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white">
           {menus.map((menu, index) => (
             <a
               key={menu.url}
@@ -103,7 +103,7 @@ export default function MobileMenu() {
           ))}
         </nav>
 
-        <div class="p-4 mt-auto space-y-4">
+        <div class="p-4 mt-auto space-y-4 bg-white">
             <a href="/login" class="w-full block text-center bg-cyan-600 text-white font-bold py-3 px-6 rounded-full hover:bg-cyan-700 transition-all duration-300 ease-in-out transform hover:-translate-y-px hover:shadow-lg hover:shadow-cyan-500/50">
                 Вход
             </a>

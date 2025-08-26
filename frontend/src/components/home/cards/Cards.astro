@@ -1,0 +1,162 @@
+---
+// --- ДАННЫЕ ДЛЯ ФИЛЬТРОВ И КАРТОЧЕК ---
+
+// Определяем данные для кнопок-фильтров
+const filtersData = [
+  { id: 'all', label: 'Все' },
+  { id: 'development', label: 'Разработка 1С' },
+  { id: 'outsourcing', label: 'Аутсорс задач' },
+  { id: 'support', label: 'Сопровождение 1С' },
+  { id: 'implementation', label: 'Внедрение 1С' },
+  { id: 'setup', label: 'Настройка 1С' },
+];
+
+// Определяем данные для карточек.
+// Свойство 'category' должно соответствовать 'id' в filtersData
+const cardsData = [
+  {
+    id: 1,
+    category: 'development',
+    title: 'Разработка 1С',
+    description: 'Создание кастомных решений под ваш бизнес',
+    gradient: 'from-blue-500 to-indigo-600',
+    height: 'h-48',
+  },
+  {
+    id: 2,
+    category: 'outsourcing',
+    title: 'Аутсорс задач',
+    description: 'Выполним любые задачи по 1С',
+    gradient: 'from-cyan-500 to-teal-600',
+    height: 'h-32',
+  },
+  {
+    id: 3,
+    category: 'support',
+    title: 'Сопровождение 1С',
+    description: 'Техподдержка и обновления 24/7',
+    gradient: 'from-purple-500 to-pink-600',
+    height: 'h-48',
+  },
+  {
+    id: 4,
+    category: 'implementation',
+    title: 'Внедрение 1С',
+    description: 'Быстрое внедрение за 2 недели',
+    gradient: 'from-orange-500 to-red-600',
+    height: 'h-24',
+  },
+  {
+    id: 5,
+    category: 'setup',
+    title: 'Настройка 1С',
+    description: 'Подстройка под ваши бизнес-процессы',
+    gradient: 'from-green-500 to-emerald-600',
+    height: 'h-36',
+  },
+  {
+    id: 6,
+    category: 'support', // Эта карточка тоже относится к сопровождению
+    title: 'Оптимизация 1С',
+    description: 'Ускорение работы и снижение нагрузки',
+    gradient: 'from-yellow-500 to-amber-600',
+    height: 'h-40',
+  },
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Фильтры -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      {filtersData.map((filter, index) => (
+          <button
+              data-filter={filter.id}
+              class={`filter-btn px-6 py-3 font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                index === 0 // Делаем первую кнопку активной по умолчанию
+              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+              }`}
+          >
+            {filter.label}
+          </button>
+      ))}
+    </div>
+
+    <!-- Сетка карточек с новой стилизацией -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {cardsData.map((card) => (
+          <div
+              data-category={card.category}
+              class="card-item group relative bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2"
+          >
+            {/* Градиентный фон карточки */}
+            <div class={`h-48 ${card.gradient} relative`}>
+              {/* Тень на градиенте */}
+              <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10"></div>
+
+              {/* Центральная иконка */}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                  <svg class="w-8 h-8 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Контент карточки */}
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
+              <p class="text-gray-600 mb-4 leading-relaxed">{card.description}</p>
+              <a href="#" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 transition-colors group">
+                Подробнее
+                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Получаем все кнопки-фильтры и все карточки
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card-item');
+
+  // Добавляем обработчик клика на каждую кнопку
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Получаем ID категории из data-атрибута нажатой кнопки
+      const selectedCategory = button.dataset.filter;
+
+      // 1. Обновляем стили кнопок: делаем активной только нажатую
+      filterButtons.forEach(btn => {
+        if (btn === button) {
+          // Стили для активной кнопки
+          btn.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'shadow-lg');
+          btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
+        } else {
+          // Стили для неактивных кнопок
+          btn.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'shadow-lg');
+          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
+        }
+      });
+
+      // 2. Фильтруем карточки
+      cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+
+        // Если выбрана категория "Все" ИЛИ категория карточки совпадает с выбранной
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          card.classList.remove('hidden'); // Показываем карточку
+        } else {
+          card.classList.add('hidden'); // Скрываем карточку
+        }
+      });
+    });
+  });
+</script>
