@@ -1,0 +1,9 @@
+{
+  "name": "shared-types",
+  "version": "1.0.0",
+  "main": "./src/payload-types.ts",
+  "types": "./src/payload-types.ts",
+  "devDependencies": {
+    "payload": "3.53.0"
+  }
+}

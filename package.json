@@ -1,0 +1,16 @@
+{
+  "name": "trisoft",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "build": "pnpm --filter \"./**\" build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "sharp": "0.33.4"
+  }
+}
