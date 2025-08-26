@@ -11,7 +11,8 @@
       "@assets/*": ["src/assets/*"],
       "@stores/*": ["src/stores/*"]
     },
-//    "jsx": "react-jsx",
-//    "jsxImportSource": "preact"
-  }
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro"]
 }

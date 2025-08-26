@@ -1,17 +1,32 @@
 {
-  "name": "astro",
+  "name": "frontend",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --port 3000",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format:check": "biome format .",
+    "format:write": "biome format --write .",
+    "lint:check": "biome lint .",
+    "lint:fix": "biome lint --apply .",
+    "check": "biome check --apply ."
   },
   "dependencies": {
+    "@astrojs/preact": "^4.1.0",
+    "@astrojs/vercel": "^8.2.6",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.3",
+    "astro-icon": "^1.1.5",
+    "preact": "^10.27.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-icons": "^5.5.0",
     "shared-types": "workspace:*",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.2"
   }
 }

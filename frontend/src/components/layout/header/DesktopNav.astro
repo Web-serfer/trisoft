@@ -1,0 +1,25 @@
+---
+// Получаем ссылки из пропсов
+const { navLinks } = Astro.props;
+
+type NavLink = {
+  href: string;
+  text:string;
+}
+---
+
+<!-- hidden md:flex - скрыто на мобильных, flex на десктопе -->
+<nav class="hidden md:flex">
+  <ul class="flex items-center gap-8">
+    {navLinks.map((link: NavLink) => (
+        <li>
+          <a
+              href={link.href}
+              class="font-medium text-gray-700 transition-colors duration-200 hover:text-indigo-600"
+          >
+            {link.text}
+          </a>
+        </li>
+    ))}
+  </ul>
+</nav>
