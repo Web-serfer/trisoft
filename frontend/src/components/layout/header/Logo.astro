@@ -12,7 +12,7 @@
     <span class="logo-char" style="--i: 6;">f</span>
     <span class="logo-char" style="--i: 7;">t</span>
   </div>
-  <div class="text-xs tracking-widest text-gray-400 tagline">
+  <div class="text-xs tracking-widest text-gray-500 tagline">
     Ваш партнер 1С
   </div>
 </a>
@@ -21,13 +21,8 @@
   .logo-container {
     display: inline-flex; /* Use inline-flex for better alignment */
     white-space: nowrap;
-    color: #fff;
     transition: all 0.3s ease;
     text-decoration: none; /* Remove default link underline */
-  }
-
-  .logo-container:hover {
-    color: #fff; /* Prevent text color change on hover */
   }
 
   .logo-text {
@@ -36,16 +31,14 @@
 
   .logo-char {
     display: inline-block;
-    animation: flicker 3s infinite;
-    animation-delay: calc(var(--i) * 0.1s);
-    background: linear-gradient(45deg, #06B6D4, #8B5CF6, #D946EF);
+    color: #333;
+    background: linear-gradient(45deg, #0891B2, #374151, #111827);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .logo-container:hover .logo-char {
-    animation: bounce 0.5s ease infinite alternate;
-    animation-delay: calc(var(--i) * 0.05s);
+     opacity: 0.8;
   }
 
   .tagline {
@@ -57,22 +50,5 @@
   .logo-container:hover .tagline {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  @keyframes flicker {
-    0%, 100% {
-      opacity: 1;
-      text-shadow: 0 0 5px #06B6D4, 0 0 10px #06B6D4, 0 0 20px #8B5CF6, 0 0 40px #8B5CF6, 0 0 80px #D946EF;
-    }
-    50% {
-      opacity: 0.8;
-      text-shadow: 0 0 2px #06B6D4, 0 0 5px #06B6D4, 0 0 10px #8B5CF6;
-    }
-  }
-
-  @keyframes bounce {
-    to {
-      transform: translateY(-5px);
-    }
   }
 </style>

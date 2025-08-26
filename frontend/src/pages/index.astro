@@ -1,13 +1,13 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import Hero from "../components/home/Hero.astro"
 
 const pageTitle = "Реальная 1С автоматизация бизнеса ";
 const pageDescription = "Автоматизация малого, среднего или крупного бизнеса коробочными или индивидуальными решениями 1С «под ключ». Работаем по всей России.";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-    <h2 class="text-center text-2xl font-bold mt-10">Приветствуем Вас на главной странице портала - Trisoft !!</h2>
-    <p class="text-center font-semibold mt-2">Проект создается с помощью фреймворка Astro и Payload CMS</p>
+    <Hero />
 </Layout>
 
 

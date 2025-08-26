@@ -1,0 +1,88 @@
+---
+// Hero.astro
+---
+
+<section class="relative bg-gray-100 text-gray-800 py-16 md:py-24 overflow-hidden">
+  <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+    
+    <!-- Left Column: Text Content -->
+    <div class="z-10">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 animate-fade-in-up">
+        Автоматизация процессов вашего бизнеса <span class="text-cyan-600">«под ключ»</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-600 max-w-xl mb-8 animate-fade-in-up animation-delay-300">
+        Используйте все преимущества 1С для безошибочной работы и роста вашей компании.
+      </p>
+      <div class="flex flex-wrap gap-4 animate-fade-in-up animation-delay-600">
+        <button id="hero-callback-button" type="button" class="bg-cyan-600 text-white font-bold py-3 px-8 rounded-full hover:bg-cyan-700 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/50">
+          Заказать консультацию
+        </button>
+        <a href="/cases" class="bg-transparent border-2 border-gray-400 text-gray-600 font-bold py-3 px-8 rounded-full hover:bg-gray-200 hover:border-gray-500 transition-all duration-300 ease-in-out">
+          Смотреть кейсы
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Visual Element -->
+    <div class="relative hidden md:block h-80">
+      <div class="absolute w-28 h-28 bg-cyan-200 rounded-full opacity-50 -top-4 -left-4 animate-pulse"></div>
+      <div class="absolute w-40 h-40 bg-purple-200 rounded-full opacity-50 top-12 left-12 animate-pulse animation-delay-300"></div>
+      <div class="absolute w-20 h-20 bg-teal-200 rounded-full opacity-50 bottom-4 right-4 animate-pulse animation-delay-600"></div>
+      <div class="absolute w-32 h-32 border-4 border-cyan-300 rounded-full top-0 right-0 animate-spin-slow"></div>
+      <div class="absolute w-16 h-16 border-4 border-purple-300 rounded-full bottom-12 left-0 animate-spin-slow animation-delay-300"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+</style>
+
+<script>
+    import { isModalOpen } from '@stores/modalStore';
+
+    document.addEventListener('astro:page-load', () => {
+        const button = document.getElementById('hero-callback-button');
+        if (button) {
+            button.addEventListener('click', () => {
+                isModalOpen.set(true);
+            });
+        }
+    });
+</script>

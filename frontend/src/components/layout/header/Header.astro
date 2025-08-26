@@ -5,25 +5,24 @@ import MobileMenu from './MobileMenu.tsx';
 import Modal from '@components/base/Modal.tsx';
 ---
 
-<header id="header" class="sticky top-0 z-50 w-full h-20 bg-gray-900 shadow-lg">
-  <div
-    id="header-container"
-    class="relative h-full max-w-[1440px] px-4 mx-auto transition-all duration-300"
-  >
-    <div class="flex items-center justify-between h-full select-none">
-      <Logo />
-      <div class="flex-1 flex justify-center">
-        <nav class="hidden lg:flex items-center">
-          <Navbar />
-        </nav>
-      </div>
-      <div class="hidden lg:flex flex-none">
-        <button id="callback-button" type="button" class="px-4 py-2 text-white bg-cyan-600 rounded-md hover:bg-cyan-700 hover:cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-px hover:shadow-lg hover:shadow-cyan-500/50">
-          Заказать звонок
-        </button>
-      </div>
-      <div class="lg:hidden">
-        <MobileMenu client:load />
+<header class="sticky top-0 z-50 w-full h-20">
+  <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300">
+    <div class="container mx-auto h-full px-4">
+      <div class="flex items-center justify-between h-full select-none">
+        <Logo />
+        <div class="flex-1 flex justify-center">
+          <nav class="hidden lg:flex items-center">
+            <Navbar />
+          </nav>
+        </div>
+        <div class="hidden lg:flex items-center gap-x-4">
+          <a href="/login" class="group px-8 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-cyan-500/25 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+            Вход
+          </a>
+        </div>
+        <div class="lg:hidden">
+          <MobileMenu client:load />
+        </div>
       </div>
     </div>
   </div>
@@ -32,9 +31,24 @@ import Modal from '@components/base/Modal.tsx';
 <Modal client:load />
 
 <script>
-  import { isModalOpen } from '@stores/modalStore';
+  const headerInnerContainer = document.getElementById('header-inner-container');
+  const scrollHandler = () => {
+    if (window.scrollY > 20) {
+      headerInnerContainer.classList.remove('bg-white', 'shadow-sm');
+      headerInnerContainer.classList.add('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
+    } else {
+      headerInnerContainer.classList.add('bg-white', 'shadow-sm');
+      headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
+    }
+  };
 
-  document.getElementById('callback-button').addEventListener('click', () => {
-    isModalOpen.set(true);
+  window.addEventListener('scroll', scrollHandler);
+
+  // Cleanup the event listener when the component is unmounted
+  document.addEventListener('astro:page-load', () => {
+    scrollHandler(); // Run on page load
   });
+  document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', scrollHandler)
+  })
 </script>
