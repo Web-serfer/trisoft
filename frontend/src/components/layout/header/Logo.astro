@@ -2,31 +2,57 @@
 // Logo.astro
 ---
 
-<a href="/" class="flex flex-col items-center logo-container no-underline">
-  <div class="text-2xl font-bold tracking-wider uppercase logo-text">
-    <span class="logo-char" style="--i: 1;">T</span>
-    <span class="logo-char" style="--i: 2;">r</span>
-    <span class="logo-char" style="--i: 3;">i</span>
-    <span class="logo-char" style="--i: 4;">s</span>
-    <span class="logo-char" style="--i: 5;">o</span>
-    <span class="logo-char" style="--i: 6;">f</span>
-    <span class="logo-char" style="--i: 7;">t</span>
+<a href="/" class="logo-container no-underline relative inline-block">
+  <div class="logo-text-wrapper absolute top-0 left-0 w-full h-full flex items-center justify-center">
+    <div class="logo-text text-2xl font-bold tracking-wider uppercase">
+      <span class="logo-char" style="--i: 1;">T</span>
+      <span class="logo-char" style="--i: 2;">r</span>
+      <span class="logo-char" style="--i: 3;">i</span>
+      <span class="logo-char" style="--i: 4;">s</span>
+      <span class="logo-char" style="--i: 5;">o</span>
+      <span class="logo-char" style="--i: 6;">f</span>
+      <span class="logo-char" style="--i: 7;">t</span>
+    </div>
   </div>
-  <div class="text-xs tracking-widest text-gray-500 tagline">
-    Ваш партнер 1С
+  <div class="tagline-wrapper absolute top-0 left-0 w-full h-full flex items-center justify-center">
+    <div class="tagline text-sm font-semibold text-gray-700">
+      Ваш партнер 1С
+    </div>
   </div>
 </a>
 
 <style>
   .logo-container {
-    display: inline-flex; /* Use inline-flex for better alignment */
     white-space: nowrap;
-    transition: all 0.3s ease;
-    text-decoration: none; /* Remove default link underline */
+    text-decoration: none;
+    overflow: hidden;
+    height: 40px;
+    width: 150px;
   }
 
-  .logo-text {
-    display: inline-block;
+  .logo-text-wrapper,
+  .tagline-wrapper {
+    transition: all 0.3s ease;
+  }
+
+  .logo-text-wrapper {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tagline-wrapper {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  .logo-container:hover .logo-text-wrapper {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  .logo-container:hover .tagline-wrapper {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .logo-char {
@@ -39,16 +65,5 @@
 
   .logo-container:hover .logo-char {
      opacity: 0.8;
-  }
-
-  .tagline {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .logo-container:hover .tagline {
-    opacity: 1;
-    transform: translateY(0);
   }
 </style>

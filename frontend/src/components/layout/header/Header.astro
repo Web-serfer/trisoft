@@ -6,8 +6,8 @@ import Modal from '@components/base/Modal.tsx';
 ---
 
 <header id="main-header" class="sticky top-0 z-50 w-full h-20">
-  <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300">
-    <div class="container max-w-7xl mx-auto h-full px-4">
+  <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300 relative">
+    <div class="max-w-7xl mx-auto h-full px-4">
       <div class="flex items-center justify-between h-full select-none">
         <Logo />
         <div class="flex-1 flex justify-center">
@@ -25,6 +25,7 @@ import Modal from '@components/base/Modal.tsx';
         </div>
       </div>
     </div>
+    <div id="scroll-line" class="absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300" style="width: 0;"></div>
   </div>
 </header>
 
@@ -49,10 +50,19 @@ import Modal from '@components/base/Modal.tsx';
 
 <script>
   const headerInnerContainer = document.getElementById('header-inner-container');
+  const scrollLine = document.getElementById('scroll-line');
+
   const scrollHandler = () => {
     // Ensure the header always has the default opaque classes
     headerInnerContainer.classList.add('bg-white', 'shadow-sm');
     headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
+    
+    // Control the scroll line animation
+    if (window.scrollY > 20) {
+      scrollLine.style.width = '100%';
+    } else {
+      scrollLine.style.width = '0%';
+    }
   };
 
   window.addEventListener('scroll', scrollHandler);
