@@ -5,7 +5,7 @@ interface Props extends HTMLAttributes<'a'> {
   href: string;
   text: string;
   variant?: 'primary' | 'secondary';
-  size?: 'normal' | 'large';
+  size?: 'normal' | 'large' | 'small';
   class?: string;
 }
 
@@ -44,7 +44,7 @@ const variantClasses = {
   secondary: [
     'bg-white/80',
     'backdrop-blur-sm',
-    'border-2',
+    'border',
     'border-gray-200',
     'text-gray-700',
     'hover:border-blue-300',
@@ -55,6 +55,7 @@ const variantClasses = {
 const sizeClasses = {
   normal: ['px-8', 'py-2', 'rounded-xl'],
   large: ['px-8', 'py-4', 'rounded-2xl'],
+  small: ['px-5', 'py-2', 'rounded-lg', 'text-sm'],
 };
 
 const allClasses = [

@@ -1,5 +1,6 @@
 ---
 import {Image} from 'astro:assets';
+import Button from '@components/base/Button.astro';
 
 // Разработка
 import devMainImage from '@assets/images/filtersCards/development-main.avif';
@@ -164,16 +165,8 @@ const filterLabelsMap = new Map(filtersData.map(f => [f.id, f.label]));
                 ))}
               </div>
 
-              <div class="mt-auto pt-2 text-right">
-                <a href="#"
-                   class="inline-flex items-center font-semibold text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
-                  Узнать больше
-                  <svg class="ml-2 w-4 h-4 animate-beat-right learn-more-arrow" fill="none"
-                       stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
+              <div class="mt-auto pt-2 text-center">
+                <Button href="#" text="Узнать больше" variant="secondary" size="small" />
               </div>
             </div>
           </div>
