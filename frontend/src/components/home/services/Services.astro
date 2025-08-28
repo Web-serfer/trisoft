@@ -21,19 +21,22 @@ const filtersData = [
 
 // Данные для карточек
 const cardsData = [
-  {id: 1, category: 'development', title: 'Разработка 1С', description: 'Создание кастомных решений и конфигураций под ваш бизнес.', image: devImage},
-  {id: 2, category: 'outsourcing', title: 'Аутсорс задач', description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.', image: outsourceImage},
-  {id: 3, category: 'support', title: 'Сопровождение 1С', description: 'Техническая поддержка, консультации и обновления 24/7.', image: supportImage},
-  {id: 4, category: 'implementation', title: 'Внедрение 1С', description: 'Комплексное внедрение типовых и отраслевых решений.', image: implementationImage},
-  {id: 5, category: 'setup', title: 'Настройка 1С', description: 'Адаптация и настройка системы под ваши бизнес-процессы.', image: setupImage},
-  {id: 6, category: 'support', title: 'Оптимизация 1С', description: 'Ускорение работы баз данных и снижение нагрузки на сервер.', image: optimizationImage},
-  {id: 7, category: 'development', title: 'Интеграция 1С с другими системами', description: 'Настройка обмена данными с сайтами, CRM, ERP и другими сервисами.', image: devImage},
-  {id: 8, category: 'setup', title: 'Настройка обмена данными', description: 'Синхронизация данных между различными базами и конфигурациями 1С.', image: setupImage},
-  {id: 9, category: 'development', title: 'Разработка мобильных приложений 1С', description: 'Создание удобных мобильных клиентов для работы с вашей базой 1С.', image: devImage},
-  {id: 10, category: 'support', title: 'Аудит производительности', description: 'Полный анализ системы для выявления и устранения узких мест.', image: supportImage},
-  {id: 11, category: 'setup', title: 'Настройка торгового оборудования', description: 'Подключение и настройка сканеров, принтеров, касс и весов.', image: setupImage},
-  {id: 12, category: 'implementation', title: 'Переход на новые редакции 1С', description: 'Безопасный и быстрый перенос данных на актуальные версии программ.', image: implementationImage},
+  {id: 1, categories: ['development'], title: 'Разработка 1С', description: 'Создание кастомных решений и конфигураций под ваш бизнес.', image: devImage},
+  {id: 2, categories: ['outsourcing'], title: 'Аутсорс задач', description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.', image: outsourceImage},
+  {id: 3, categories: ['support'], title: 'Сопровождение 1С', description: 'Техническая поддержка, консультации и обновления 24/7.', image: supportImage},
+  {id: 4, categories: ['implementation'], title: 'Внедрение 1С', description: 'Комплексное внедрение типовых и отраслевых решений.', image: implementationImage},
+  {id: 5, categories: ['setup'], title: 'Настройка 1С', description: 'Адаптация и настройка системы под ваши бизнес-процессы.', image: setupImage},
+  {id: 6, categories: ['support', 'setup'], title: 'Оптимизация 1С', description: 'Ускорение работы баз данных и снижение нагрузки на сервер.', image: optimizationImage},
+  {id: 7, categories: ['development', 'implementation'], title: 'Интеграция 1С с другими системами', description: 'Настройка обмена данными с сайтами, CRM, ERP и другими сервисами.', image: devImage},
+  {id: 8, categories: ['setup'], title: 'Настройка обмена данными', description: 'Синхронизация данных между различными базами и конфигурациями 1С.', image: setupImage},
+  {id: 9, categories: ['development'], title: 'Разработка мобильных приложений 1С', description: 'Создание удобных мобильных клиентов для работы с вашей базой 1С.', image: devImage},
+  {id: 10, categories: ['support'], title: 'Аудит производительности', description: 'Полный анализ системы для выявления и устранения узких мест.', image: supportImage},
+  {id: 11, categories: ['setup', 'implementation'], title: 'Настройка торгового оборудования', description: 'Подключение и настройка сканеров, принтеров, касс и весов.', image: setupImage},
+  {id: 12, categories: ['implementation', 'support'], title: 'Переход на новые редакции 1С', description: 'Безопасный и быстрый перенос данных на актуальные версии программ.', image: implementationImage},
 ];
+
+// Создаем Map для быстрого поиска названий тегов по их ID
+const filterLabelsMap = new Map(filtersData.map(f => [f.id, f.label]));
 ---
 
 <section class="py-20">
@@ -56,18 +59,23 @@ const cardsData = [
     <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {cardsData.map((card, index) => (
           <div
-              data-category={card.category}
-              class:list={["card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl", {'card-hidden': index >= 6}]}>
+              data-categories={card.categories.join(' ')}
+              class:list={["card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl", {'is-hiding card-hidden': index >= 6}]}>
             <div class="relative overflow-hidden aspect-video">
               <Image src={card.image} alt={`Иллюстрация для услуги: ${card.title}`} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" densities={[1.5, 2]} loading="lazy" />
             </div>
             <div class="p-6 flex flex-col">
               <h3 class="text-xl font-bold text-gray-900 mb-2">{card.title}</h3>
               <p class="text-gray-600 leading-relaxed mb-4 flex-grow">{card.description}</p>
+
               <div class="flex flex-wrap gap-2 mb-6">
-                <span class="px-3 py-1 bg-pink-50 text-pink-600 text-xs font-medium rounded-full">1С</span>
-                <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">Автоматизация</span>
+                {card.categories.map(categoryId => (
+                    <span class="px-3 py-1 bg-pink-50 text-pink-600 text-xs font-medium rounded-full">
+                    {filterLabelsMap.get(categoryId) || categoryId}
+                  </span>
+                ))}
               </div>
+
               <div class="mt-auto pt-2 text-right">
                 <a href="#" class="inline-flex items-center font-semibold text-gray-800 group-hover:text-pink-600 transition-colors">
                   Узнать больше
@@ -81,7 +89,7 @@ const cardsData = [
       ))}
     </div>
 
-    <div id="show-more-container" class="text-center">
+    <div id="show-more-container" class="text-center mt-12">
       <button id="show-more-btn" class="inline-flex items-center justify-center h-14 px-8 bg-white text-pink-700 font-semibold rounded-xl border border-pink-200 hover:bg-[#FDE6EA] transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:cursor-pointer">
         <span id="show-more-text">Показать еще</span>
         <svg id="show-more-icon" class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,18 +102,16 @@ const cardsData = [
 
 <style>
     .card-item {
-        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, max-height 0.7s ease-in-out;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        transform-origin: center;
+    }
+    .is-hiding {
+        transform: scale(0.9);
+        opacity: 0;
+        pointer-events: none;
     }
     .card-hidden {
-        opacity: 0;
-        transform: translateY(20px);
-        max-height: 0;
-        overflow: hidden;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        border-width: 0;
+        display: none;
     }
     #show-more-icon {
         transition: transform 0.3s ease-in-out;
@@ -116,94 +122,97 @@ const cardsData = [
 </style>
 
 <script>
-  const INITIAL_VISIBLE_CARDS = 6;
-  const STAGGER_DELAY = 100;
+  document.addEventListener('DOMContentLoaded', () => {
+    const INITIAL_VISIBLE_CARDS = 6;
+    const ANIMATION_DURATION = 400; // ms, должно совпадать с transition в CSS
 
-  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  const cards = document.querySelectorAll<HTMLElement>('.card-item');
-  const showMoreBtn = document.getElementById('show-more-btn');
-  const showMoreText = document.getElementById('show-more-text');
-  const showMoreIcon = document.getElementById('show-more-icon');
-  const showMoreContainer = document.getElementById('show-more-container');
+    // ИСПРАВЛЕНИЕ: Указываем TypeScript конкретные типы элементов
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.card-item');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showMoreText = document.getElementById('show-more-text');
+    const showMoreIcon = document.getElementById('show-more-icon');
+    const showMoreContainer = document.getElementById('show-more-container');
 
-  let isExpanded = false;
-  let currentFilter = 'all';
+    // Проверка на null для всех элементов, чтобы скрипт не падал
+    if (!showMoreBtn || !showMoreText || !showMoreIcon || !showMoreContainer || !cards.length) {
+      console.error('Filter component elements not found.');
+      return;
+    }
 
-  function updateCardVisibilityOnFilterChange() {
-    const limit = isExpanded ? cards.length : INITIAL_VISIBLE_CARDS;
-    let visibleCounter = 0;
+    let isExpanded = false;
+    let currentFilter = 'all';
 
-    cards.forEach(card => {
-      card.style.transitionDelay = '0ms';
-      const cardCategory = card.dataset.category;
-      const matchesFilter = currentFilter === 'all' || cardCategory === currentFilter;
+    // Функция, которая возвращает отфильтрованные карточки
+    const getFilteredCards = () => {
+      return Array.from(cards).filter(card => {
+        // Теперь TypeScript знает, что у 'card' есть 'dataset'
+        const cardCategories = card.dataset.categories?.split(' ') || [];
+        return currentFilter === 'all' || cardCategories.includes(currentFilter);
+      });
+    };
 
-      if (matchesFilter && visibleCounter < limit) {
-        card.classList.remove('card-hidden');
-        visibleCounter++;
+    const updateShowMoreButton = () => {
+      const filteredCards = getFilteredCards();
+      if (filteredCards.length > INITIAL_VISIBLE_CARDS) {
+        showMoreContainer.style.display = 'block';
+        showMoreText.textContent = isExpanded ? 'Свернуть' : 'Показать еще';
+        showMoreIcon.classList.toggle('icon-rotated', isExpanded);
       } else {
-        card.classList.add('card-hidden');
+        showMoreContainer.style.display = 'none';
       }
-    });
-  }
+    };
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      currentFilter = button.dataset.filter ?? 'all';
+    const updateCardsVisibility = () => {
+      const filteredCards = getFilteredCards();
+      const limit = isExpanded ? filteredCards.length : INITIAL_VISIBLE_CARDS;
 
-      filterButtons.forEach(btn => {
-        btn.classList.toggle('active-filter', btn === button);
-        btn.classList.toggle('bg-[#FDE6EA]', btn === button);
-        btn.classList.toggle('text-pink-700', btn === button);
-        btn.classList.toggle('border-pink-200', btn === button);
-        btn.classList.toggle('shadow-sm', btn === button);
-        btn.classList.toggle('bg-white', btn !== button);
-        btn.classList.toggle('text-gray-700', btn !== button);
-        btn.classList.toggle('border-gray-200', btn !== button);
-        btn.classList.toggle('hover:bg-gray-50', btn !== button);
+      // Итерируем по всем картам и решаем, скрыть или показать
+      cards.forEach(card => {
+        const isCurrentlyVisible = !card.classList.contains('card-hidden');
+        const shouldBeVisible = filteredCards.includes(card) && filteredCards.indexOf(card) < limit;
+
+        if (shouldBeVisible && !isCurrentlyVisible) {
+          // Показать карточку
+          card.classList.remove('card-hidden');
+          requestAnimationFrame(() => {
+            card.classList.remove('is-hiding');
+          });
+        } else if (!shouldBeVisible && isCurrentlyVisible) {
+          // Скрыть карточку
+          card.classList.add('is-hiding');
+          setTimeout(() => {
+            card.classList.add('card-hidden');
+          }, ANIMATION_DURATION);
+        }
       });
 
-      updateCardVisibilityOnFilterChange();
-    });
-  });
+      updateShowMoreButton();
+    };
 
-  if (showMoreBtn && showMoreText && showMoreIcon && showMoreContainer) {
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Теперь TypeScript знает, что у 'button' есть 'dataset'
+        currentFilter = button.dataset.filter ?? 'all';
+        isExpanded = false; // Сбрасываем "Показать еще" при смене фильтра
+
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active-filter', 'bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
+          btn.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
+        });
+        button.classList.add('active-filter', 'bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
+        button.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
+
+        updateCardsVisibility();
+      });
+    });
+
     showMoreBtn.addEventListener('click', () => {
       isExpanded = !isExpanded;
-
-      const filteredCards = Array.from(cards).filter(card => {
-        const cardCategory = card.dataset.category;
-        return currentFilter === 'all' || cardCategory === currentFilter;
-      });
-
-      if (isExpanded) {
-        showMoreText.textContent = 'Свернуть';
-        showMoreIcon.classList.add('icon-rotated');
-        showMoreContainer.classList.add('mt-12');
-
-
-        const cardsToShow = filteredCards.slice(INITIAL_VISIBLE_CARDS);
-
-        cardsToShow.forEach((card, index) => {
-          card.style.transitionDelay = `${index * STAGGER_DELAY}ms`;
-          card.classList.remove('card-hidden');
-        });
-
-      } else {
-        showMoreText.textContent = 'Показать еще';
-        showMoreIcon.classList.remove('icon-rotated');
-        showMoreContainer.classList.remove('mt-12');
-
-
-        if (filteredCards.length > INITIAL_VISIBLE_CARDS) {
-          const cardsToHide = filteredCards.slice(INITIAL_VISIBLE_CARDS);
-
-          cardsToHide.reverse().forEach((card, index) => {
-            card.style.transitionDelay = `${index * STAGGER_DELAY}ms`;
-            card.classList.add('card-hidden');
-          });
-        }
-      }
+      updateCardsVisibility();
     });
-  }
+
+    // Первоначальная инициализация видимости карточек и кнопки
+    updateShowMoreButton();
+  });
 </script>
