@@ -1,15 +1,16 @@
 ---
 import '@styles/global.css'
-import Header from "@components/layout/header/Header.astro";
-import Footer from "@components/layout/footer/Footer.astro";
+import Header from "@components/layout/header/Header.astro"; // Убедитесь, что пути верны
+import Footer from "@components/layout/footer/Footer.astro"; // Убедитесь, что пути верны
+import Modal from '@components/base/Modal.astro';
 
 export interface Props {
   title: string;
   description: string;
-}
+  }
 
 const { title, description } = Astro.props;
-const canonicalURL = Astro.url.href;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const siteName = "ООО «Трисофт»";
 const finalTitle = `${title} | ${siteName}`;
@@ -25,13 +26,14 @@ const finalTitle = `${title} | ${siteName}`;
   <title>{finalTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
-
 </head>
 <body>
-  <Header />
-    <main class="mx-auto px-4">
-      <slot />
-    </main>
-  <Footer />
+<Header />
+<main>
+  <slot />
+</main>
+<Footer />
+<Modal />
 </body>
 </html>
+

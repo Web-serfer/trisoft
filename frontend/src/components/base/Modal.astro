@@ -1,0 +1,29 @@
+---
+import CallbackForm from './CallbackForm.astro';
+---
+
+<dialog
+    id="callback-modal"
+    class="m-auto w-[95vw] max-w-lg rounded-lg bg-gray-100 text-white shadow-xl backdrop:bg-gray/40 backdrop:backdrop-blur-sm"
+>
+  <div class="relative">
+    <button id="modal-close-button" class="absolute top-2 right-2 z-10 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-600 hover:cursor-pointer">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <CallbackForm />
+  </div>
+</dialog>
+
+<style>
+    dialog {
+        padding: 0;
+        border: none;
+    }
+    dialog[open] {
+        animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>

@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import Navbar from './Navbar.astro';
 import MobileMenu from './MobileMenu.tsx';
-import Modal from '@components/base/Modal.tsx';
+import Modal from '@components/base/Modal.astro';
 import Button from '@components/base/Button.astro';
 ---
 
@@ -28,7 +28,6 @@ import Button from '@components/base/Button.astro';
   </div>
 </header>
 
-<Modal client:load />
 
 <style>
   @keyframes fade-in-down {

@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --parallel dev",
-    "dev:frontend": "pnpm --filter frontend dev",
-    "dev:backend": "pnpm --filter backend dev",
-    "build": "pnpm --filter \"./**\" build"
+    "dev:frontend": "pnpm  frontend dev",
+    "dev:backend": "pnpm  backend dev",
+    "build": "pnpm build"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

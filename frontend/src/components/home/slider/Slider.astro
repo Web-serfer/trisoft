@@ -1,0 +1,288 @@
+---
+const programmers = [
+  {
+    id: 1,
+    name: "Александр Петров",
+    position: "Senior 1С Developer",
+    experience: "8+ лет опыта",
+    skills: ["1С:ERP", "1С:УТП", "Интеграции API", "Оптимизация"],
+    projects: "120+",
+    rating: "4.9/5",
+    image: "/images/programmers/1.jpg"
+  },
+  {
+    id: 2,
+    name: "Мария Иванова",
+    position: "Full-stack 1С Developer",
+    experience: "6+ лет опыта",
+    skills: ["1С:Бухгалтерия", "Web-разработка", "Мобильные приложения", "Битрикс24"],
+    projects: "85+",
+    rating: "4.8/5",
+    image: "/images/programmers/2.jpg"
+  },
+  {
+    id: 4,
+    name: "Екатерина Козлова",
+    position: "1С Analytics Developer",
+    experience: "5+ лет опыта",
+    skills: ["1С:БП", "Бизнес-аналитика", "Отчетность", "Дашборды"],
+    projects: "65+",
+    rating: "4.7/5",
+    image: "/images/programmers/4.jpg"
+  },
+  {
+    id: 5,
+    name: "Михаил Орлов",
+    position: "1С Integration Specialist",
+    experience: "7+ лет опыта",
+    skills: ["API интеграции", "1С-сайты", "Онлайн-кассы", "Банковские сервисы"],
+    projects: "95+",
+    rating: "4.9/5",
+    image: "/images/programmers/5.jpg"
+  },
+  {
+    id: 6,
+    name: "Анна Новикова",
+    position: "1С Mobile Developer",
+    experience: "4+ лет опыта",
+    skills: ["Мобильная платформа", "1С", "iOS/Android", "UI/UX дизайн"],
+    projects: "50+",
+    rating: "4.8/5",
+    image: "/images/programmers/6.jpg"
+
+  },
+  {
+    id: 7,
+    name: "Ольга Воробьёва",
+    position: "Ведущий консультант 1С:Финансы",
+    experience: "9+ лет опыта",
+    skills: ["1С:УХ", "Финансовый учет", "Бюджетирование", "МСФО"],
+    projects: "110+",
+    rating: "4.9/5",
+    image: "/images/programmers/7.jpg"
+
+  }
+];
+---
+
+<section class="relative py-20 bg-gray-50 overflow-hidden">
+  <!-- Декоративные элементы -->
+  <div class="absolute top-0 left-0 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Заголовок секции -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Наша команда экспертов
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Профессиональные разработчики 1С с многолетним опытом реализации сложных проектов
+      </p>
+    </div>
+
+    <!-- Контейнер для карусели -->
+    <div class="relative carousel-container">
+      <!-- Кнопки навигации -->
+      <div class="absolute inset-y-0 left-0 z-10 flex items-center -ml-4">
+        <button
+            class="prev-btn bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:border-blue-300">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="absolute inset-y-0 right-0 z-10 flex items-center -mr-4">
+        <button
+            class="next-btn bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:border-blue-300">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Видимая область карусели -->
+      <div class="carousel-viewport overflow-hidden">
+        <!-- Трек со всеми карточками -->
+        <div class="carousel-track flex">
+          {programmers.map((programmer) => (
+              <div class="carousel-slide p-4" key={programmer.id}>
+                <div
+                    class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 h-full flex flex-col">
+                  {/* Аватар и основная информация */}
+                  <div class="text-center mb-6">
+                    <div class="relative inline-block mb-4">
+                      <img src={programmer.image} alt={programmer.name}
+                           class="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-lg object-cover"/>
+                      <div
+                          class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full animate-pulse-green"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">{programmer.name}</h3>
+                    <p class="text-blue-600 font-semibold mb-2">{programmer.position}</p>
+                    <p class="text-gray-500 text-sm">{programmer.experience}</p>
+                  </div>
+                  {/* Навыки */}
+                  <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Навыки</h4>
+                    <div class="flex flex-wrap gap-2">
+                      {programmer.skills.map((skill, index) => (
+                          <span key={index}
+                                class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border border-gray-200">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Статистика */}
+                  <div class="mt-auto">
+                    <div class="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl mb-6">
+                      <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">{programmer.projects}</div>
+                        <div class="text-xs text-gray-500">Проектов</div>
+                      </div>
+                      <div class="text-center">
+                        <div class="text-2xl font-bold text-green-600">{programmer.rating}</div>
+                        <div class="text-xs text-gray-500">Рейтинг</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .carousel-track {
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel-slide {
+        flex-shrink: 0;
+        width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+        .carousel-slide {
+            width: calc(100% / 3);
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .carousel-slide {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .prev-btn, .next-btn {
+            display: none;
+        }
+    }
+
+    /* Анимация для иконки онлайн-статуса */
+    .animate-pulse-green {
+        animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse-green {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); /* green-400 */
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+        }
+    }
+</style>
+
+<script define:vars={{programmers}}>
+  document.addEventListener('DOMContentLoaded', function () {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (!carouselContainer) return;
+
+    const track = carouselContainer.querySelector('.carousel-track');
+    const prevBtn = carouselContainer.querySelector('.prev-btn');
+    const nextBtn = carouselContainer.querySelector('.next-btn');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let currentIndex = 0;
+    let cardsPerView;
+    let totalSlides;
+    let autoScrollInterval;
+    const AUTO_SCROLL_DELAY = 8000;
+
+    function getCardsPerView() {
+      const width = window.innerWidth;
+      if (width >= 1024) return 3;
+      if (width >= 768) return 2;
+      return 1;
+    }
+
+    function setupCarousel() {
+      cardsPerView = getCardsPerView();
+      if (!Array.isArray(programmers) || programmers.length === 0) {
+        totalSlides = 0;
+        return;
+      }
+      totalSlides = Math.ceil(programmers.length / cardsPerView);
+      if (currentIndex >= totalSlides) {
+        currentIndex = totalSlides > 0 ? totalSlides - 1 : 0;
+      }
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      if (totalSlides === 0) return;
+      const offset = currentIndex * -100;
+      track.style.transform = `translateX(${offset}%)`;
+    }
+
+    function nextSlide() {
+      if (totalSlides === 0) return;
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      if (totalSlides === 0) return;
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function startAutoScroll() {
+      if (autoScrollInterval) clearInterval(autoScrollInterval);
+      if (totalSlides > 1) {
+        autoScrollInterval = setInterval(nextSlide, AUTO_SCROLL_DELAY);
+      }
+    }
+
+    function stopAutoScroll() {
+      clearInterval(autoScrollInterval);
+    }
+
+    function restartAutoScroll() {
+      stopAutoScroll();
+      startAutoScroll();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      restartAutoScroll();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      restartAutoScroll();
+    });
+
+    carouselContainer.addEventListener('mouseenter', stopAutoScroll);
+    carouselContainer.addEventListener('mouseleave', startAutoScroll);
+
+    window.addEventListener('resize', setupCarousel);
+
+    setupCarousel();
+    startAutoScroll();
+  });
+</script>

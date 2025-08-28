@@ -1,8 +1,9 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Hero from "@components/home/hero/Hero.astro"
-import Services from "@components/home/solutions/OurSolutions.astro"
-import Cards from "@components/home/services/Services.astro"
+import Solution from "@components/home/solutions/OurSolutions.astro"
+import Services from "@components/home/services/Services.astro"
+import Slider from "@components/home/slider/Slider.astro"
 
 const pageTitle = "Реальная 1С автоматизация бизнеса ";
 const pageDescription = "Автоматизация малого, среднего или крупного бизнеса коробочными или индивидуальными решениями 1С «под ключ». Работаем по всей России.";
@@ -10,8 +11,9 @@ const pageDescription = "Автоматизация малого, среднег
 
 <Layout title={pageTitle} description={pageDescription}>
     <Hero />
+    <Solution />
     <Services />
-    <Cards />
+    <Slider />
 </Layout>
 
 
