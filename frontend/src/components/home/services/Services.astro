@@ -1,13 +1,13 @@
 ---
 import {Image} from 'astro:assets';
 
+// Импорты изображений
 import devImage from '@assets/images/filtersCards/development.avif';
 import outsourceImage from '@assets/images/filtersCards/outsourcing.avif';
 import supportImage from '@assets/images/filtersCards/support.avif';
 import implementationImage from '@assets/images/filtersCards/implementation.avif';
 import setupImage from '@assets/images/filtersCards/setup.avif';
 import optimizationImage from '@assets/images/filtersCards/optimization.avif';
-
 
 // Данные для фильтров
 const filtersData = [
@@ -19,96 +19,47 @@ const filtersData = [
   {id: 'setup', label: 'Настройка 1С'},
 ];
 
+// Данные для карточек
 const cardsData = [
-  {
-    id: 1,
-    category: 'development',
-    title: 'Разработка 1С',
-    description: 'Создание кастомных решений под ваш бизнес.',
-    image: devImage
-  },
-  {
-    id: 2,
-    category: 'outsourcing',
-    title: 'Аутсорс задач',
-    description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.',
-    image: outsourceImage
-  },
-  {
-    id: 3,
-    category: 'support',
-    title: 'Сопровождение 1С',
-    description: 'Техническая поддержка, консультации и обновления 24/7.',
-    image: supportImage
-  },
-  {
-    id: 4,
-    category: 'implementation',
-    title: 'Внедрение 1С',
-    description: 'Комплексное внедрение типовых и отраслевых решений.',
-    image: implementationImage
-  },
-  {
-    id: 5,
-    category: 'setup',
-    title: 'Настройка 1С',
-    description: 'Адаптация и настройка системы под ваши бизнес-процессы.',
-    image: setupImage
-  },
-  {
-    id: 6,
-    category: 'support',
-    title: 'Оптимизация 1С',
-    description: 'Ускорение работы баз данных и снижение нагрузки на сервер.',
-    image: optimizationImage
-  },
+  {id: 1, category: 'development', title: 'Разработка 1С', description: 'Создание кастомных решений и конфигураций под ваш бизнес.', image: devImage},
+  {id: 2, category: 'outsourcing', title: 'Аутсорс задач', description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.', image: outsourceImage},
+  {id: 3, category: 'support', title: 'Сопровождение 1С', description: 'Техническая поддержка, консультации и обновления 24/7.', image: supportImage},
+  {id: 4, category: 'implementation', title: 'Внедрение 1С', description: 'Комплексное внедрение типовых и отраслевых решений.', image: implementationImage},
+  {id: 5, category: 'setup', title: 'Настройка 1С', description: 'Адаптация и настройка системы под ваши бизнес-процессы.', image: setupImage},
+  {id: 6, category: 'support', title: 'Оптимизация 1С', description: 'Ускорение работы баз данных и снижение нагрузки на сервер.', image: optimizationImage},
+  {id: 7, category: 'development', title: 'Интеграция 1С с другими системами', description: 'Настройка обмена данными с сайтами, CRM, ERP и другими сервисами.', image: devImage},
+  {id: 8, category: 'setup', title: 'Настройка обмена данными', description: 'Синхронизация данных между различными базами и конфигурациями 1С.', image: setupImage},
+  {id: 9, category: 'development', title: 'Разработка мобильных приложений 1С', description: 'Создание удобных мобильных клиентов для работы с вашей базой 1С.', image: devImage},
+  {id: 10, category: 'support', title: 'Аудит производительности', description: 'Полный анализ системы для выявления и устранения узких мест.', image: supportImage},
+  {id: 11, category: 'setup', title: 'Настройка торгового оборудования', description: 'Подключение и настройка сканеров, принтеров, касс и весов.', image: setupImage},
+  {id: 12, category: 'implementation', title: 'Переход на новые редакции 1С', description: 'Безопасный и быстрый перенос данных на актуальные версии программ.', image: implementationImage},
 ];
 ---
 
 <section class="py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Заголовок секции -->
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Экспертные услуги 1С
-      </h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-        Профессиональные решения для автоматизации и развития вашего бизнеса
-      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Экспертные услуги 1С</h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">Профессиональные решения для автоматизации и развития вашего бизнеса</p>
     </div>
 
-    <!-- Фильтры -->
     <div class="flex flex-wrap justify-center gap-4 mb-12">
       {filtersData.map((filter, index) => (
           <button
               data-filter={filter.id}
-              class:list={[
-                'filter-btn px-6 py-3 font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:cursor-pointer',
-                index === 0
-                  ? 'bg-[#FDE6EA] text-pink-700 border border-pink-200 shadow-sm'
-                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-              ]}
-          >
+              class:list={['filter-btn px-6 py-3 font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:cursor-pointer', index === 0 ? 'bg-[#FDE6EA] text-pink-700 border border-pink-200 shadow-sm active-filter' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50']}>
             {filter.label}
           </button>
       ))}
     </div>
 
-    <!-- Сетка карточек -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {cardsData.map((card) => (
+    <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {cardsData.map((card, index) => (
           <div
               data-category={card.category}
-              class="card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
-          >
+              class:list={["card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl", {'card-hidden': index >= 6}]}>
             <div class="relative overflow-hidden aspect-video">
-              <Image
-                  src={card.image}
-                  alt={`Иллюстрация для услуги: ${card.title}`}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  densities={[1.5, 2]}
-                  loading="lazy"
-              />
+              <Image src={card.image} alt={`Иллюстрация для услуги: ${card.title}`} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" densities={[1.5, 2]} loading="lazy" />
             </div>
             <div class="p-6 flex flex-col">
               <h3 class="text-xl font-bold text-gray-900 mb-2">{card.title}</h3>
@@ -118,13 +69,10 @@ const cardsData = [
                 <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">Автоматизация</span>
               </div>
               <div class="mt-auto pt-2 text-right">
-                <a href="#"
-                   class="inline-flex items-center font-semibold text-pink-600 group-hover:text-pink-800 transition-colors">
+                <a href="#" class="inline-flex items-center font-semibold text-gray-800 group-hover:text-pink-600 transition-colors">
                   Узнать больше
-                  <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none"
-                       stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                   </svg>
                 </a>
               </div>
@@ -132,39 +80,130 @@ const cardsData = [
           </div>
       ))}
     </div>
+
+    <div id="show-more-container" class="text-center">
+      <button id="show-more-btn" class="inline-flex items-center justify-center h-14 px-8 bg-white text-pink-700 font-semibold rounded-xl border border-pink-200 hover:bg-[#FDE6EA] transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:cursor-pointer">
+        <span id="show-more-text">Показать еще</span>
+        <svg id="show-more-icon" class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </section>
 
-<!-- Клиентский скрипт для фильтрации остается без изменений -->
+<style>
+    .card-item {
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, max-height 0.7s ease-in-out;
+    }
+    .card-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-width: 0;
+    }
+    #show-more-icon {
+        transition: transform 0.3s ease-in-out;
+    }
+    .icon-rotated {
+        transform: rotate(180deg);
+    }
+</style>
+
 <script>
+  const INITIAL_VISIBLE_CARDS = 6;
+  const STAGGER_DELAY = 100;
+
   const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
   const cards = document.querySelectorAll<HTMLElement>('.card-item');
+  const showMoreBtn = document.getElementById('show-more-btn');
+  const showMoreText = document.getElementById('show-more-text');
+  const showMoreIcon = document.getElementById('show-more-icon');
+  const showMoreContainer = document.getElementById('show-more-container');
+
+  let isExpanded = false;
+  let currentFilter = 'all';
+
+  function updateCardVisibilityOnFilterChange() {
+    const limit = isExpanded ? cards.length : INITIAL_VISIBLE_CARDS;
+    let visibleCounter = 0;
+
+    cards.forEach(card => {
+      card.style.transitionDelay = '0ms';
+      const cardCategory = card.dataset.category;
+      const matchesFilter = currentFilter === 'all' || cardCategory === currentFilter;
+
+      if (matchesFilter && visibleCounter < limit) {
+        card.classList.remove('card-hidden');
+        visibleCounter++;
+      } else {
+        card.classList.add('card-hidden');
+      }
+    });
+  }
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const selectedCategory = button.dataset.filter;
+      currentFilter = button.dataset.filter ?? 'all';
 
       filterButtons.forEach(btn => {
-        if (btn === button) {
-          btn.classList.add('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200', 'shadow-sm');
-          btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
-        } else {
-          btn.classList.remove('bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
-          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
-        }
+        btn.classList.toggle('active-filter', btn === button);
+        btn.classList.toggle('bg-[#FDE6EA]', btn === button);
+        btn.classList.toggle('text-pink-700', btn === button);
+        btn.classList.toggle('border-pink-200', btn === button);
+        btn.classList.toggle('shadow-sm', btn === button);
+        btn.classList.toggle('bg-white', btn !== button);
+        btn.classList.toggle('text-gray-700', btn !== button);
+        btn.classList.toggle('border-gray-200', btn !== button);
+        btn.classList.toggle('hover:bg-gray-50', btn !== button);
       });
 
-      cards.forEach(card => {
-        const cardCategory = card.dataset.category;
-
-        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-          card.style.display = '';
-          card.classList.remove('hidden');
-        } else {
-          card.style.display = 'none';
-          card.classList.add('hidden');
-        }
-      });
+      updateCardVisibilityOnFilterChange();
     });
   });
+
+  if (showMoreBtn && showMoreText && showMoreIcon && showMoreContainer) {
+    showMoreBtn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+
+      const filteredCards = Array.from(cards).filter(card => {
+        const cardCategory = card.dataset.category;
+        return currentFilter === 'all' || cardCategory === currentFilter;
+      });
+
+      if (isExpanded) {
+        showMoreText.textContent = 'Свернуть';
+        showMoreIcon.classList.add('icon-rotated');
+        showMoreContainer.classList.add('mt-12');
+
+
+        const cardsToShow = filteredCards.slice(INITIAL_VISIBLE_CARDS);
+
+        cardsToShow.forEach((card, index) => {
+          card.style.transitionDelay = `${index * STAGGER_DELAY}ms`;
+          card.classList.remove('card-hidden');
+        });
+
+      } else {
+        showMoreText.textContent = 'Показать еще';
+        showMoreIcon.classList.remove('icon-rotated');
+        showMoreContainer.classList.remove('mt-12');
+
+
+        if (filteredCards.length > INITIAL_VISIBLE_CARDS) {
+          const cardsToHide = filteredCards.slice(INITIAL_VISIBLE_CARDS);
+
+          cardsToHide.reverse().forEach((card, index) => {
+            card.style.transitionDelay = `${index * STAGGER_DELAY}ms`;
+            card.classList.add('card-hidden');
+          });
+        }
+      }
+    });
+  }
 </script>
