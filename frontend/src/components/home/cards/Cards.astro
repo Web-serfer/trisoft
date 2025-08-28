@@ -1,7 +1,4 @@
 ---
-// --- ДАННЫЕ ДЛЯ ФИЛЬТРОВ И КАРТОЧЕК ---
-
-// Определяем данные для кнопок-фильтров
 const filtersData = [
   { id: 'all', label: 'Все' },
   { id: 'development', label: 'Разработка 1С' },
@@ -11,8 +8,6 @@ const filtersData = [
   { id: 'setup', label: 'Настройка 1С' },
 ];
 
-// Определяем данные для карточек.
-// Свойство 'category' должно соответствовать 'id' в filtersData
 const cardsData = [
   {
     id: 1,
@@ -150,38 +145,41 @@ const cardsData = [
 </section>
 
 <script>
-  // Получаем все кнопки-фильтры и все карточки
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card-item');
+  // Получаем все кнопки-фильтры и все карточки, указывая их типы
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.card-item');
 
   // Добавляем обработчик клика на каждую кнопку
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // Получаем ID категории из data-атрибута нажатой кнопки
+      // Теперь TypeScript не ругается, т.к. знает, что у HTMLButtonElement есть dataset
       const selectedCategory = button.dataset.filter;
 
       // 1. Обновляем стили кнопок: делаем активной только нажатую
       filterButtons.forEach(btn => {
         if (btn === button) {
           // Стили для активной кнопки
-          btn.classList.add('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200');
+          btn.classList.add('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200', 'shadow-sm');
           btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
         } else {
           // Стили для неактивных кнопок
-          btn.classList.remove('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200');
+          btn.classList.remove('bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
           btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
         }
       });
 
       // 2. Фильтруем карточки
       cards.forEach(card => {
+        // И здесь TypeScript тоже не ругается
         const cardCategory = card.dataset.category;
 
         // Если выбрана категория "Все" ИЛИ категория карточки совпадает с выбранной
         if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-          card.classList.remove('hidden'); // Показываем карточку
+          card.style.display = ''; // Показываем карточку (более надежный способ, чем удаление/добавление 'hidden')
+          card.classList.remove('hidden');
         } else {
-          card.classList.add('hidden'); // Скрываем карточку
+          card.style.display = 'none'; // Скрываем карточку
+          card.classList.add('hidden');
         }
       });
     });
