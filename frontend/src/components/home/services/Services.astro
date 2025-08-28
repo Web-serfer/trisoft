@@ -1,174 +1,170 @@
 ---
-const features = [
+import {Image} from 'astro:assets';
+
+import devImage from '@assets/images/filtersCards/development.avif';
+import outsourceImage from '@assets/images/filtersCards/outsourcing.avif';
+import supportImage from '@assets/images/filtersCards/support.avif';
+import implementationImage from '@assets/images/filtersCards/implementation.avif';
+import setupImage from '@assets/images/filtersCards/setup.avif';
+import optimizationImage from '@assets/images/filtersCards/optimization.avif';
+
+
+// Данные для фильтров
+const filtersData = [
+  {id: 'all', label: 'Все'},
+  {id: 'development', label: 'Разработка 1С'},
+  {id: 'outsourcing', label: 'Аутсорс задач'},
+  {id: 'support', label: 'Сопровождение 1С'},
+  {id: 'implementation', label: 'Внедрение 1С'},
+  {id: 'setup', label: 'Настройка 1С'},
+];
+
+const cardsData = [
   {
-    // Общие стили для всей карточки
-    styling: {
-      bgColor: 'bg-teal-500/10',
-      titleColor: 'text-teal-600',
-      textColor: 'text-gray-700',
-      button: {
-        bgColor: 'bg-teal-600',
-        textColor: 'text-white',
-        hoverBgColor: 'hover:bg-teal-700',
-        focusRingColor: 'focus-visible:outline-teal-600',
-      },
-    },
-    // "Лицевая" сторона карточки
-    front: {
-      title: 'АВТОМАТИЗАЦИЯ ОПТА И РОЗНИЦЫ',
-      items: [
-        { icon: '🔥', text: 'Учёт продаж и аналитика' },
-        { icon: '📦', text: 'Склад и движение товаров' },
-        { icon: '🤝', text: 'Расчёты с контрагентами' },
-      ],
-    },
-    // "Обратная" сторона карточки, появляется при наведении
-    back: {
-      title: '1С:УПРАВЛЕНИЕ ТОРГОВЛЕЙ',
-      items: [
-        { icon: '👉', text: 'Работа с карточками товаров, скидки' },
-        { icon: '👉', text: 'Внедрение штрих-кодов' },
-        { icon: '👉', text: 'Шаблоны документов' },
-      ],
-      button: {
-        text: 'Подробнее об 1С:УТ',
-        link: '#',
-      },
-    },
+    id: 1,
+    category: 'development',
+    title: 'Разработка 1С',
+    description: 'Создание кастомных решений под ваш бизнес.',
+    image: devImage
   },
   {
-    styling: {
-      bgColor: 'bg-rose-500/10',
-      titleColor: 'text-rose-600',
-      textColor: 'text-gray-700',
-      button: {
-        bgColor: 'bg-rose-600',
-        textColor: 'text-white',
-        hoverBgColor: 'hover:bg-rose-700',
-        focusRingColor: 'focus-visible:outline-rose-600',
-      },
-    },
-    front: {
-      title: 'АВТОМАТИЗАЦИЯ ПРОИЗВОДСТВА',
-      items: [
-        { icon: '🏭', text: 'Учёт производимого продукта' },
-        { icon: '🔄', text: 'Переход на ЭДО' },
-        { icon: '📉', text: 'Контроль себестоимости' },
-      ],
-    },
-    back: {
-      title: '1С:ERP УПРАВЛЕНИЕ ПРЕДПРИЯТИЕМ',
-      items: [
-        { icon: '⇒', text: 'Гибкая настройка логистики' },
-        { icon: '⇒', text: 'Любые виды номенклатуры и артикулов' },
-        { icon: '⇒', text: 'Планирование производства' },
-      ],
-      button: {
-        text: 'Подробнее о внедрении 1С:ERP',
-        link: '#',
-      },
-    },
+    id: 2,
+    category: 'outsourcing',
+    title: 'Аутсорс задач',
+    description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.',
+    image: outsourceImage
   },
   {
-    styling: {
-      bgColor: 'bg-indigo-900',
-      titleColor: 'text-white',
-      textColor: 'text-indigo-200',
-      button: {
-        bgColor: 'bg-white',
-        textColor: 'text-indigo-900',
-        hoverBgColor: 'hover:bg-indigo-100',
-        focusRingColor: 'focus-visible:outline-white',
-      },
-    },
-    front: {
-      title: '1С ДЛЯ СФЕРЫ УСЛУГ',
-      items: [
-        { icon: '💰', text: 'Управление воронкой продаж' },
-        { icon: '📄', text: 'Договоры, счета и акты' },
-        { icon: '⚡️', text: 'Обработка новых заявок' },
-      ],
-    },
-    back: {
-      title: '1С:УПРАВЛЕНИЕ НАШЕЙ ФИРМОЙ',
-      items: [
-        { icon: '⌚', text: 'Переход на ЭДО' },
-        { icon: '⌚', text: 'Актуальные шаблоны документов' },
-        { icon: '⌚', text: 'Работа с отзывами и коммуникация' },
-      ],
-      button: {
-        text: 'Подробнее о внедрении 1С:УНФ',
-        link: '#',
-      },
-    },
+    id: 3,
+    category: 'support',
+    title: 'Сопровождение 1С',
+    description: 'Техническая поддержка, консультации и обновления 24/7.',
+    image: supportImage
+  },
+  {
+    id: 4,
+    category: 'implementation',
+    title: 'Внедрение 1С',
+    description: 'Комплексное внедрение типовых и отраслевых решений.',
+    image: implementationImage
+  },
+  {
+    id: 5,
+    category: 'setup',
+    title: 'Настройка 1С',
+    description: 'Адаптация и настройка системы под ваши бизнес-процессы.',
+    image: setupImage
+  },
+  {
+    id: 6,
+    category: 'support',
+    title: 'Оптимизация 1С',
+    description: 'Ускорение работы баз данных и снижение нагрузки на сервер.',
+    image: optimizationImage
   },
 ];
 ---
 
-<section class="py-16 sm:py-24 bg-gray-50">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:text-center">
-      <h2 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        Комплексные решения для вашего бизнеса
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Заголовок секции -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Экспертные услуги 1С
       </h2>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
-        Мы предлагаем готовые пакеты для автоматизации ключевых бизнес-процессов с использованием проверенных технологий 1С.
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Профессиональные решения для автоматизации и развития вашего бизнеса
       </p>
     </div>
-    <div class="mx-auto mt-16 max-w-none">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div class={`group grid [grid-template-areas:'stack'] rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:cursor-pointer ${feature.styling.bgColor}`}>
 
-            {/* --- ЛИЦЕВАЯ СТОРОНА --- */}
-              <div class="[grid-area:stack] flex flex-col transition-opacity duration-500 ease-in-out group-hover:opacity-0">
-                <h3 class={`text-xl font-bold tracking-tight ${feature.styling.titleColor}`}>{feature.front.title}</h3>
-                <ul role="list" class={`mt-6 space-y-4 flex-grow ${feature.styling.textColor}`}>
-                  {feature.front.items.map((item) => (
-                      <li class="flex items-start">
-                        <span class="mr-3 text-xl">{item.icon}</span>
-                        <span>{item.text}</span>
-                      </li>
-                  ))}
-                </ul>
-                <div class="mt-8 text-center font-semibold text-sm opacity-70">
-                  <span class={`italic ${feature.styling.titleColor}`}>Наведите, чтобы узнать больше</span>
-                </div>
-              </div>
+    <!-- Фильтры -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      {filtersData.map((filter, index) => (
+          <button
+              data-filter={filter.id}
+              class:list={[
+                'filter-btn px-6 py-3 font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:cursor-pointer',
+                index === 0
+                  ? 'bg-[#FDE6EA] text-pink-700 border border-pink-200 shadow-sm'
+                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+              ]}
+          >
+            {filter.label}
+          </button>
+      ))}
+    </div>
 
-            {/* --- ОБРАТНАЯ СТОРОНА --- */}
-              <div class="[grid-area:stack] flex flex-col transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100">
-                <h3 class={`text-xl font-bold tracking-tight ${feature.styling.titleColor}`}>{feature.back.title}</h3>
-                <ul role="list" class={`mt-6 space-y-4 flex-grow ${feature.styling.textColor}`}>
-                  {feature.back.items.map((item) => (
-                      <li class="flex items-start">
-                        <span class="mr-3 text-xl font-sans">{item.icon}</span>
-                        <span>{item.text}</span>
-                      </li>
-                  ))}
-                </ul>
-                <div class="mt-8">
-                  <a
-                      href={feature.back.button.link}
-                      class={`
-                    inline-block w-full rounded-lg px-6 py-3
-                    text-center font-semibold shadow-sm
-                    transition-colors duration-200
-                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                    ${feature.styling.button.bgColor}
-                    ${feature.styling.button.textColor}
-                    ${feature.styling.button.hoverBgColor}
-                    ${feature.styling.button.focusRingColor}
-                  `}
-                  >
-                    {feature.back.button.text}
-                  </a>
-                </div>
-              </div>
-
+    <!-- Сетка карточек -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {cardsData.map((card) => (
+          <div
+              data-category={card.category}
+              class="card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
+          >
+            <div class="relative overflow-hidden aspect-video">
+              <Image
+                  src={card.image}
+                  alt={`Иллюстрация для услуги: ${card.title}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  densities={[1.5, 2]}
+                  loading="lazy"
+              />
             </div>
-        ))}
-      </div>
+            <div class="p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{card.title}</h3>
+              <p class="text-gray-600 leading-relaxed mb-4 flex-grow">{card.description}</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-pink-50 text-pink-600 text-xs font-medium rounded-full">1С</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">Автоматизация</span>
+              </div>
+              <div class="mt-auto pt-2 text-right">
+                <a href="#"
+                   class="inline-flex items-center font-semibold text-pink-600 group-hover:text-pink-800 transition-colors">
+                  Узнать больше
+                  <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none"
+                       stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+      ))}
     </div>
   </div>
 </section>
+
+<!-- Клиентский скрипт для фильтрации остается без изменений -->
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.card-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedCategory = button.dataset.filter;
+
+      filterButtons.forEach(btn => {
+        if (btn === button) {
+          btn.classList.add('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200', 'shadow-sm');
+          btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
+        } else {
+          btn.classList.remove('bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
+          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
+        }
+      });
+
+      cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          card.style.display = '';
+          card.classList.remove('hidden');
+        } else {
+          card.style.display = 'none';
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
