@@ -117,16 +117,15 @@ const features = [
     </div>
     <div class="mx-auto mt-16 max-w-none">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        {features.map((feature, index) => (
-          // Карточка-контейнер: теперь вся карточка имеет cursor-pointer при наведении
-          <div key={index} class={`group grid [grid-template-areas:'stack'] rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:cursor-pointer ${feature.styling.bgColor}`}>
+        {features.map((feature) => (
+          <div class={`group grid [grid-template-areas:'stack'] rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:cursor-pointer ${feature.styling.bgColor}`}>
 
             {/* --- ЛИЦЕВАЯ СТОРОНА --- */}
               <div class="[grid-area:stack] flex flex-col transition-opacity duration-500 ease-in-out group-hover:opacity-0">
                 <h3 class={`text-xl font-bold tracking-tight ${feature.styling.titleColor}`}>{feature.front.title}</h3>
                 <ul role="list" class={`mt-6 space-y-4 flex-grow ${feature.styling.textColor}`}>
-                  {feature.front.items.map((item, itemIndex) => (
-                      <li key={itemIndex} class="flex items-start">
+                  {feature.front.items.map((item) => (
+                      <li class="flex items-start">
                         <span class="mr-3 text-xl">{item.icon}</span>
                         <span>{item.text}</span>
                       </li>
@@ -141,8 +140,8 @@ const features = [
               <div class="[grid-area:stack] flex flex-col transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100">
                 <h3 class={`text-xl font-bold tracking-tight ${feature.styling.titleColor}`}>{feature.back.title}</h3>
                 <ul role="list" class={`mt-6 space-y-4 flex-grow ${feature.styling.textColor}`}>
-                  {feature.back.items.map((item, itemIndex) => (
-                      <li key={itemIndex} class="flex items-start">
+                  {feature.back.items.map((item) => (
+                      <li class="flex items-start">
                         <span class="mr-3 text-xl font-sans">{item.icon}</span>
                         <span>{item.text}</span>
                       </li>

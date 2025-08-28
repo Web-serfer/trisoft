@@ -1,0 +1,170 @@
+---
+import {Image} from 'astro:assets';
+
+import devImage from '@assets/images/filtersCards/development.avif';
+import outsourceImage from '@assets/images/filtersCards/outsourcing.avif';
+import supportImage from '@assets/images/filtersCards/support.avif';
+import implementationImage from '@assets/images/filtersCards/implementation.avif';
+import setupImage from '@assets/images/filtersCards/setup.avif';
+import optimizationImage from '@assets/images/filtersCards/optimization.avif';
+
+
+// Данные для фильтров
+const filtersData = [
+  {id: 'all', label: 'Все'},
+  {id: 'development', label: 'Разработка 1С'},
+  {id: 'outsourcing', label: 'Аутсорс задач'},
+  {id: 'support', label: 'Сопровождение 1С'},
+  {id: 'implementation', label: 'Внедрение 1С'},
+  {id: 'setup', label: 'Настройка 1С'},
+];
+
+const cardsData = [
+  {
+    id: 1,
+    category: 'development',
+    title: 'Разработка 1С',
+    description: 'Создание кастомных решений под ваш бизнес.',
+    image: devImage
+  },
+  {
+    id: 2,
+    category: 'outsourcing',
+    title: 'Аутсорс задач',
+    description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.',
+    image: outsourceImage
+  },
+  {
+    id: 3,
+    category: 'support',
+    title: 'Сопровождение 1С',
+    description: 'Техническая поддержка, консультации и обновления 24/7.',
+    image: supportImage
+  },
+  {
+    id: 4,
+    category: 'implementation',
+    title: 'Внедрение 1С',
+    description: 'Комплексное внедрение типовых и отраслевых решений.',
+    image: implementationImage
+  },
+  {
+    id: 5,
+    category: 'setup',
+    title: 'Настройка 1С',
+    description: 'Адаптация и настройка системы под ваши бизнес-процессы.',
+    image: setupImage
+  },
+  {
+    id: 6,
+    category: 'support',
+    title: 'Оптимизация 1С',
+    description: 'Ускорение работы баз данных и снижение нагрузки на сервер.',
+    image: optimizationImage
+  },
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Заголовок секции -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Экспертные услуги 1С
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Профессиональные решения для автоматизации и развития вашего бизнеса
+      </p>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      {filtersData.map((filter, index) => (
+          <button
+              data-filter={filter.id}
+              class:list={[
+                'filter-btn px-6 py-3 font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:cursor-pointer',
+                index === 0
+                  ? 'bg-[#FDE6EA] text-pink-700 border border-pink-200 shadow-sm'
+                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+              ]}
+          >
+            {filter.label}
+          </button>
+      ))}
+    </div>
+
+    <!-- Сетка карточек -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {cardsData.map((card) => (
+          <div
+              data-category={card.category}
+              class="card-item group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
+          >
+            <div class="relative overflow-hidden aspect-video">
+              <Image
+                  src={card.image}
+                  alt={`Иллюстрация для услуги: ${card.title}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  densities={[1.5, 2]}
+                  loading="lazy"
+              />
+            </div>
+            <div class="p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{card.title}</h3>
+              <p class="text-gray-600 leading-relaxed mb-4 flex-grow">{card.description}</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-pink-50 text-pink-600 text-xs font-medium rounded-full">1С</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">Автоматизация</span>
+              </div>
+              <div class="mt-auto pt-2 text-right">
+                <a href="#"
+                   class="inline-flex items-center font-semibold text-pink-600 group-hover:text-pink-800 transition-colors">
+                  Узнать больше
+                  <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none"
+                       stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Клиентский скрипт для фильтрации остается без изменений -->
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.card-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedCategory = button.dataset.filter;
+
+      filterButtons.forEach(btn => {
+        if (btn === button) {
+          btn.classList.add('bg-[#FDE6EA]', 'text-pink-700', 'border', 'border-pink-200', 'shadow-sm');
+          btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:bg-gray-50');
+        } else {
+          btn.classList.remove('bg-[#FDE6EA]', 'text-pink-700', 'border-pink-200', 'shadow-sm');
+          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'hover:bg-gray-50');
+        }
+      });
+
+      cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          card.style.display = '';
+          card.classList.remove('hidden');
+        } else {
+          card.style.display = 'none';
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
