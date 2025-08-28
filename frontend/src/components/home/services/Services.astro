@@ -8,7 +8,7 @@ import implementationImage from '@assets/images/filtersCards/implementation.avif
 import setupImage from '@assets/images/filtersCards/setup.avif';
 import optimizationImage from '@assets/images/filtersCards/optimization.avif';
 
-// Данные для фильтров
+// Данные для фильтров (без изменений)
 const filtersData = [
   {id: 'all', label: 'Все'},
   {id: 'development', label: 'Разработка 1С'},
@@ -18,95 +18,99 @@ const filtersData = [
   {id: 'setup', label: 'Настройка 1С'},
 ];
 
-// Данные для карточек
+// Данные для карточек (обновлены согласно запросу)
 const cardsData = [
+  // --- 3 карточки "Разработка 1С" ---
   {
     id: 1,
     categories: ['development'],
-    title: 'Разработка 1С',
-    description: 'Создание кастомных решений и конфигураций под ваш бизнес.',
+    title: 'Разработка 1С под ключ',
+    description: 'Готовые и индивидуальные 1С решения под задачи бизнеса. Доработка, настройка и интеграция с другими системами.',
     image: devImage
   },
   {
     id: 2,
-    categories: ['outsourcing'],
-    title: 'Аутсорс задач',
-    description: 'Передайте нам любые задачи по 1С и сфокусируйтесь на главном.',
-    image: outsourceImage
+    categories: ['development', 'implementation'],
+    title: 'Модуль управления проектами и сделками в 1C',
+    description: 'Готовый модуль 1С управления сделками и проектами для вашего бизнеса',
+    image: devImage
   },
   {
     id: 3,
-    categories: ['support'],
-    title: 'Сопровождение 1С',
-    description: 'Техническая поддержка, консультации и обновления 24/7.',
-    image: supportImage
+    categories: ['development'],
+    title: 'Разработка мобильных приложений 1С',
+    description: 'Создание удобных и функциональных мобильных клиентов для работы с вашей базой 1С из любой точки мира.',
+    image: devImage
   },
+  // --- 3 карточки "Настройка 1С" ---
   {
     id: 4,
-    categories: ['implementation'],
-    title: 'Внедрение 1С',
-    description: 'Комплексное внедрение типовых и отраслевых решений.',
-    image: implementationImage
+    categories: ['setup'],
+    title: 'Первичная настройка 1С',
+    description: 'Адаптация и настройка типовой конфигурации системы под ваши уникальные бизнес-процессы.',
+    image: setupImage
   },
   {
     id: 5,
     categories: ['setup'],
-    title: 'Настройка 1С',
-    description: 'Адаптация и настройка системы под ваши бизнес-процессы.',
+    title: 'Настройка обмена данными',
+    description: 'Синхронизация данных между различными базами и конфигурациями 1С для целостности информации.',
     image: setupImage
   },
   {
     id: 6,
-    categories: ['support', 'setup'],
-    title: 'Оптимизация 1С',
-    description: 'Ускорение работы баз данных и снижение нагрузки на сервер.',
-    image: optimizationImage
+    categories: ['setup', 'implementation'],
+    title: 'Подключение торгового оборудования',
+    description: 'Интеграция и настройка сканеров штрих-кодов, онлайн-касс, принтеров этикеток и электронных весов.',
+    image: setupImage
   },
+  // --- Остальные 6 карточек для разнообразия ---
   {
     id: 7,
-    categories: ['development', 'implementation'],
-    title: 'Интеграция 1С с другими системами',
-    description: 'Настройка обмена данными с сайтами, CRM, ERP и другими сервисами.',
-    image: devImage
+    categories: ['outsourcing'],
+    title: 'Аутсорс задач 1С',
+    description: 'Передайте нам любые задачи по 1С, от рутинных операций до сложных доработок, и сфокусируйтесь на главном.',
+    image: outsourceImage
   },
   {
     id: 8,
-    categories: ['setup'],
-    title: 'Настройка обмена данными',
-    description: 'Синхронизация данных между различными базами и конфигурациями 1С.',
-    image: setupImage
+    categories: ['support'],
+    title: 'Комплексное сопровождение 1С',
+    description: 'Гарантированная техническая поддержка, оперативные консультации и регулярные обновления 24/7.',
+    image: supportImage
   },
   {
     id: 9,
-    categories: ['development'],
-    title: 'Разработка мобильных приложений 1С',
-    description: 'Создание удобных мобильных клиентов для работы с вашей базой 1С.',
-    image: devImage
+    categories: ['implementation'],
+    title: 'Внедрение 1С:Предприятие',
+    description: 'Полный цикл внедрения типовых и отраслевых решений: от анализа требований до обучения персонала.',
+    image: implementationImage
   },
   {
     id: 10,
     categories: ['support'],
-    title: 'Аудит производительности',
-    description: 'Полный анализ системы для выявления и устранения узких мест.',
-    image: supportImage
+    title: 'Оптимизация и ускорение 1С',
+    description: 'Анализ и устранение узких мест для ускорения работы баз данных и снижения нагрузки на сервер.',
+    image: optimizationImage
   },
   {
     id: 11,
-    categories: ['setup', 'implementation'],
-    title: 'Настройка торгового оборудования',
-    description: 'Подключение и настройка сканеров, принтеров, касс и весов.',
-    image: setupImage
+    categories: ['support'],
+    title: 'Аудит производительности',
+    description: 'Полный технический анализ системы для выявления и устранения проблем, влияющих на скорость работы.',
+    image: supportImage
   },
   {
     id: 12,
     categories: ['implementation', 'support'],
     title: 'Переход на новые редакции 1С',
-    description: 'Безопасный и быстрый перенос данных на актуальные версии программ.',
+    description: 'Безопасный и быстрый перенос данных со старых версий программ на самые актуальные и производительные.',
     image: implementationImage
   },
 ];
 
-// Создаем Map для быстрого поиска названий тегов по их ID
+
+// Создаем Map для быстрого поиска названий тегов по их ID (без изменений)
 const filterLabelsMap = new Map(filtersData.map(f => [f.id, f.label]));
 ---
 
@@ -206,9 +210,7 @@ const filterLabelsMap = new Map(filtersData.map(f => [f.id, f.label]));
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const INITIAL_VISIBLE_CARDS = 6;
-    const ANIMATION_DURATION = 400; // ms, должно совпадать с transition в CSS
-
-    // ИСПРАВЛЕНИЕ: Указываем TypeScript конкретные типы элементов
+    const ANIMATION_DURATION = 400;
     const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
     const cards = document.querySelectorAll<HTMLElement>('.card-item');
     const showMoreBtn = document.getElementById('show-more-btn');
