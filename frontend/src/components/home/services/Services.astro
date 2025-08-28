@@ -1,128 +1,138 @@
 ---
-import {Image} from 'astro:assets';
-import Button from '@components/base/Button.astro';
+import { Image } from 'astro:assets'
+import Button from '@components/base/Button.astro'
 
 // Разработка
-import devMainImage from '@assets/images/filtersCards/development-main.avif';
-import devModuleImage from '@assets/images/filtersCards/development-module.avif';
-import devMobileImage from '@assets/images/filtersCards/development-mobile.avif';
+import devMainImage from '@assets/images/filtersCards/development-main.avif'
+import devModuleImage from '@assets/images/filtersCards/development-module.avif'
+import devMobileImage from '@assets/images/filtersCards/development-mobile.avif'
 // Настройка
-import setupInitialImage from '@assets/images/filtersCards/setup-initial.avif';
-import setupExchangeImage from '@assets/images/filtersCards/setup-exchange.avif';
-import setupHardwareImage from '@assets/images/filtersCards/setup-hardware.avif';
+import setupInitialImage from '@assets/images/filtersCards/setup-initial.avif'
+import setupExchangeImage from '@assets/images/filtersCards/setup-exchange.avif'
+import setupHardwareImage from '@assets/images/filtersCards/setup-hardware.avif'
 // Остальные
-import outsourceImage from '@assets/images/filtersCards/outsourcing.avif';
-import supportComplexImage from '@assets/images/filtersCards/support-complex.avif';
-import implementationMainImage from '@assets/images/filtersCards/implementation-main.avif';
-import optimizationImage from '@assets/images/filtersCards/optimization.avif';
-import auditImage from '@assets/images/filtersCards/audit.avif';
-import migrationImage from '@assets/images/filtersCards/migration.avif';
-
+import outsourceImage from '@assets/images/filtersCards/outsourcing.avif'
+import supportComplexImage from '@assets/images/filtersCards/support-complex.avif'
+import implementationMainImage from '@assets/images/filtersCards/implementation-main.avif'
+import optimizationImage from '@assets/images/filtersCards/optimization.avif'
+import auditImage from '@assets/images/filtersCards/audit.avif'
+import migrationImage from '@assets/images/filtersCards/migration.avif'
 
 // Данные для фильтров (без изменений)
 const filtersData = [
-  {id: 'all', label: 'Все'},
-  {id: 'development', label: 'Разработка 1С'},
-  {id: 'outsourcing', label: 'Аутсорс задач'},
-  {id: 'support', label: 'Сопровождение 1С'},
-  {id: 'implementation', label: 'Внедрение 1С'},
-  {id: 'setup', label: 'Настройка 1С'},
-];
+	{ id: 'all', label: 'Все' },
+	{ id: 'development', label: 'Разработка 1С' },
+	{ id: 'outsourcing', label: 'Аутсорс задач' },
+	{ id: 'support', label: 'Сопровождение 1С' },
+	{ id: 'implementation', label: 'Внедрение 1С' },
+	{ id: 'setup', label: 'Настройка 1С' },
+]
 
 // Данные для карточек (каждой карточке присвоено уникальное изображение)
 const cardsData = [
-  // --- 3 карточки "Разработка 1С" ---
-  {
-    id: 1,
-    categories: ['development'],
-    title: 'Разработка 1С под ключ',
-    description: 'Готовые и индивидуальные 1С решения под задачи бизнеса. Доработка, настройка и интеграция с другими системами.',
-    image: devMainImage
-  },
-  {
-    id: 2,
-    categories: ['development', 'implementation'],
-    title: 'Модуль управления проектами и сделками в 1C',
-    description: 'Готовый модуль 1С управления сделками и проектами для вашего бизнеса',
-    image: devModuleImage
-  },
-  {
-    id: 3,
-    categories: ['development'],
-    title: 'Разработка мобильных приложений 1С',
-    description: 'Создание удобных и функциональных мобильных клиентов для работы с вашей базой 1С из любой точки мира.',
-    image: devMobileImage
-  },
-  // --- 3 карточки "Настройка 1С" ---
-  {
-    id: 4,
-    categories: ['setup'],
-    title: 'Первичная настройка 1С',
-    description: 'Адаптация и настройка типовой конфигурации системы под ваши уникальные бизнес-процессы.',
-    image: setupInitialImage
-  },
-  {
-    id: 5,
-    categories: ['setup'],
-    title: 'Настройка обмена данными',
-    description: 'Синхронизация данных между различными базами и конфигурациями 1С для целостности информации.',
-    image: setupExchangeImage
-  },
-  {
-    id: 6,
-    categories: ['setup', 'implementation'],
-    title: 'Подключение торгового оборудования',
-    description: 'Интеграция и настройка сканеров штрих-кодов, онлайн-касс, принтеров этикеток и электронных весов.',
-    image: setupHardwareImage
-  },
-  // --- Остальные 6 карточек для разнообразия ---
-  {
-    id: 7,
-    categories: ['outsourcing'],
-    title: 'Аутсорс 1С программистов в Москве',
-    description: 'Передайте нам любые задачи по 1С, от рутинных операций до сложных доработок, и сфокусируйтесь на главном.',
-    image: outsourceImage
-  },
-  {
-    id: 8,
-    categories: ['support'],
-    title: 'Комплексное сопровождение 1С',
-    description: 'Гарантированная техническая поддержка, оперативные консультации и регулярные обновления 24/7.',
-    image: supportComplexImage
-  },
-  {
-    id: 9,
-    categories: ['implementation'],
-    title: 'Внедрение 1С:Предприятие',
-    description: 'Полный цикл внедрения типовых и отраслевых решений: от анализа требований до обучения персонала.',
-    image: implementationMainImage
-  },
-  {
-    id: 10,
-    categories: ['support'],
-    title: 'Оптимизация и ускорение 1С',
-    description: 'Анализ и устранение узких мест для ускорения работы баз данных и снижения нагрузки на сервер.',
-    image: optimizationImage
-  },
-  {
-    id: 11,
-    categories: ['support'],
-    title: 'Аудит производительности',
-    description: 'Полный технический анализ системы для выявления и устранения проблем, влияющих на скорость работы.',
-    image: auditImage
-  },
-  {
-    id: 12,
-    categories: ['implementation', 'support'],
-    title: 'Переход на новые редакции 1С',
-    description: 'Безопасный и быстрый перенос данных со старых версий программ на самые актуальные и производительные.',
-    image: migrationImage
-  },
-];
-
+	// --- 3 карточки "Разработка 1С" ---
+	{
+		id: 1,
+		categories: ['development'],
+		title: 'Разработка 1С под ключ',
+		description:
+			'Готовые и индивидуальные 1С решения под задачи бизнеса. Доработка, настройка и интеграция с другими системами.',
+		image: devMainImage,
+	},
+	{
+		id: 2,
+		categories: ['development', 'implementation'],
+		title: 'Модуль управления проектами и сделками в 1C',
+		description:
+			'Готовый модуль 1С управления сделками и проектами для вашего бизнеса',
+		image: devModuleImage,
+	},
+	{
+		id: 3,
+		categories: ['development'],
+		title: 'Разработка мобильных приложений 1С',
+		description:
+			'Создание удобных и функциональных мобильных клиентов для работы с вашей базой 1С из любой точки мира.',
+		image: devMobileImage,
+	},
+	// --- 3 карточки "Настройка 1С" ---
+	{
+		id: 4,
+		categories: ['setup'],
+		title: 'Первичная настройка 1С',
+		description:
+			'Адаптация и настройка типовой конфигурации системы под ваши уникальные бизнес-процессы.',
+		image: setupInitialImage,
+	},
+	{
+		id: 5,
+		categories: ['setup'],
+		title: 'Настройка обмена данными',
+		description:
+			'Синхронизация данных между различными базами и конфигурациями 1С для целостности информации.',
+		image: setupExchangeImage,
+	},
+	{
+		id: 6,
+		categories: ['setup', 'implementation'],
+		title: 'Подключение торгового оборудования',
+		description:
+			'Интеграция и настройка сканеров штрих-кодов, онлайн-касс, принтеров этикеток и электронных весов.',
+		image: setupHardwareImage,
+	},
+	// --- Остальные 6 карточек для разнообразия ---
+	{
+		id: 7,
+		categories: ['outsourcing'],
+		title: 'Аутсорс 1С программистов в Москве',
+		description:
+			'Передайте нам любые задачи по 1С, от рутинных операций до сложных доработок, и сфокусируйтесь на главном.',
+		image: outsourceImage,
+	},
+	{
+		id: 8,
+		categories: ['support'],
+		title: 'Комплексное сопровождение 1С',
+		description:
+			'Гарантированная техническая поддержка, оперативные консультации и регулярные обновления 24/7.',
+		image: supportComplexImage,
+	},
+	{
+		id: 9,
+		categories: ['implementation'],
+		title: 'Внедрение 1С:Предприятие',
+		description:
+			'Полный цикл внедрения типовых и отраслевых решений: от анализа требований до обучения персонала.',
+		image: implementationMainImage,
+	},
+	{
+		id: 10,
+		categories: ['support'],
+		title: 'Оптимизация и ускорение 1С',
+		description:
+			'Анализ и устранение узких мест для ускорения работы баз данных и снижения нагрузки на сервер.',
+		image: optimizationImage,
+	},
+	{
+		id: 11,
+		categories: ['support'],
+		title: 'Аудит производительности',
+		description:
+			'Полный технический анализ системы для выявления и устранения проблем, влияющих на скорость работы.',
+		image: auditImage,
+	},
+	{
+		id: 12,
+		categories: ['implementation', 'support'],
+		title: 'Переход на новые редакции 1С',
+		description:
+			'Безопасный и быстрый перенос данных со старых версий программ на самые актуальные и производительные.',
+		image: migrationImage,
+	},
+]
 
 // Создаем Map для быстрого поиска названий тегов по их ID
-const filterLabelsMap = new Map(filtersData.map(f => [f.id, f.label]));
+const filterLabelsMap = new Map(filtersData.map((f) => [f.id, f.label]))
 ---
 
 <section class="py-20">
