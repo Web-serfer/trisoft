@@ -1,8 +1,7 @@
 ---
 import Logo from './Logo.astro'
 import Navbar from './Navbar.astro'
-import MobileMenu from './MobileMenu.tsx'
-import Modal from '@components/base/Modal.astro'
+import MobileMenu from './MobileMenu.astro'
 import Button from '@components/base/Button.astro'
 ---
 
@@ -20,7 +19,7 @@ import Button from '@components/base/Button.astro'
           <Button variant="primary" href="/login" text="Вход" />
         </div>
         <div class="lg:hidden">
-          <MobileMenu client:load />
+          <MobileMenu />
         </div>
       </div>
     </div>

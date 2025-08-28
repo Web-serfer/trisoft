@@ -1,0 +1,138 @@
+---
+import Logo from './Logo.astro';
+import { menus } from './navData';
+import Button from '@components/base/Button.astro';
+---
+
+<div>
+  <button
+      id="mobile-menu-toggle"
+      type="button"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      class="relative z-[60] rounded-full bg-gray-200/50 p-2 lg:hidden"
+  >
+    <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <title>Открыть меню</title>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <title>Закрыть меню</title>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div
+      id="mobile-menu-overlay"
+      class="fixed inset-0 z-40 h-full w-full bg-black/30 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none"
+      aria-hidden="true"
+  ></div>
+
+  <div
+      id="mobile-menu-container"
+      class="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out -translate-x-full"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mobile-menu-title"
+  >
+    <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4 bg-white">
+      <div id="mobile-menu-title">
+        <Logo />
+      </div>
+      <!-- ✅ ИСПРАВЛЕНО: Теперь используется size="sm" в соответствии с обновленным Button.astro -->
+      <Button variant="primary" size="sm" href="/login" text="Вход" />
+    </div>
+
+    <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
+      {menus.map((menu, index) => (
+          <a
+              href={menu.url}
+              class="mobile-menu-link block transform text-center text-xl font-medium text-gray-600 transition-all duration-300 ease-out hover:text-cyan-600 opacity-0 translate-y-4"
+              style={`transition-delay: ${100 + index * 75}ms`}
+          >
+            {menu.name}
+          </a>
+      ))}
+    </nav>
+  </div>
+</div>
+
+<script>
+  import { isModalOpen } from '@stores/modalStore';
+
+  document.addEventListener('astro:page-load', () => {
+    const toggleButton = document.getElementById('mobile-menu-toggle');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const container = document.getElementById('mobile-menu-container');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+    const navLinks = document.querySelectorAll('.mobile-menu-link');
+
+    if (!toggleButton || !overlay || !container || !openIcon || !closeIcon) {
+      return;
+    }
+
+    const openMenu = () => {
+      toggleButton.setAttribute('aria-expanded', 'true');
+      toggleButton.setAttribute('aria-label', 'Закрыть меню');
+      toggleButton.classList.add('fixed', 'right-4', 'top-4');
+      openIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+
+      container.classList.remove('-translate-x-full');
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+
+      navLinks.forEach(link => {
+        link.classList.remove('opacity-0', 'translate-y-4');
+      });
+
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleEscKey);
+    };
+
+    const closeMenu = () => {
+      toggleButton.setAttribute('aria-expanded', 'false');
+      toggleButton.setAttribute('aria-label', 'Открыть меню');
+      toggleButton.classList.remove('fixed', 'right-4', 'top-4');
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+
+      container.classList.add('-translate-x-full');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+
+      navLinks.forEach(link => {
+        link.classList.add('opacity-0', 'translate-y-4');
+      });
+
+      document.body.style.overflow = 'auto';
+      window.removeEventListener('keydown', handleEscKey);
+    };
+
+    const handleToggleClick = () => {
+      const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    };
+
+    toggleButton.addEventListener('click', handleToggleClick);
+    overlay.addEventListener('click', closeMenu);
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'auto';
+    }, { once: true });
+  });
+</script>
