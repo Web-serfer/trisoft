@@ -10,8 +10,10 @@ import Button from '@components/base/Button.astro'
     <div class="max-w-7xl mx-auto h-full px-4">
       <div class="flex items-center justify-between h-full select-none">
         <Logo />
-        <div class="flex-1 flex justify-center">
-          <nav class="hidden lg:flex items-center">
+        <!-- ✅ УЛУЧШЕНИЕ: Классы `hidden` и `lg:flex` перенесены на родительский div.
+             Теперь этот блок полностью отсутствует на мобильных, а не просто пустует. -->
+        <div class="hidden lg:flex flex-1 justify-center">
+          <nav class="flex items-center">
             <Navbar />
           </nav>
         </div>
@@ -27,22 +29,21 @@ import Button from '@components/base/Button.astro'
   </div>
 </header>
 
-
 <style>
-  @keyframes fade-in-down {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
+    @keyframes fade-in-down {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 
-  #main-header {
-    animation: fade-in-down 0.8s ease-out forwards;
-  }
+    #main-header {
+        animation: fade-in-down 0.8s ease-out forwards;
+    }
 </style>
 
 <script>
@@ -53,7 +54,7 @@ import Button from '@components/base/Button.astro'
     // Ensure the header always has the default opaque classes
     headerInnerContainer.classList.add('bg-white', 'shadow-sm');
     headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
-    
+
     // Control the scroll line animation
     if (window.scrollY > 20) {
       scrollLine.style.width = '100%';
@@ -66,10 +67,10 @@ import Button from '@components/base/Button.astro'
 
   // Run on page load to ensure correct initial state
   document.addEventListener('astro:page-load', () => {
-    scrollHandler(); 
+    scrollHandler();
   });
   // Cleanup the event listener when the component is unmounted
   document.addEventListener('astro:before-swap', () => {
-      window.removeEventListener('scroll', scrollHandler)
+    window.removeEventListener('scroll', scrollHandler)
   })
 </script>

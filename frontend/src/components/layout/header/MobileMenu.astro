@@ -39,8 +39,7 @@ import Button from '@components/base/Button.astro';
       <div id="mobile-menu-title">
         <Logo />
       </div>
-      <!-- ✅ ИСПРАВЛЕНО: Теперь используется size="sm" в соответствии с обновленным Button.astro -->
-      <Button variant="primary" size="sm" href="/login" text="Вход" />
+      <Button variant="primary" size="sm" href="/login" text="Вход" class="px-4 py-2" />
     </div>
 
     <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
@@ -58,9 +57,8 @@ import Button from '@components/base/Button.astro';
 </div>
 
 <script>
-  import { isModalOpen } from '@stores/modalStore';
+  function initMobileMenu() {
 
-  document.addEventListener('astro:page-load', () => {
     const toggleButton = document.getElementById('mobile-menu-toggle');
     const overlay = document.getElementById('mobile-menu-overlay');
     const container = document.getElementById('mobile-menu-container');
@@ -69,13 +67,13 @@ import Button from '@components/base/Button.astro';
     const navLinks = document.querySelectorAll('.mobile-menu-link');
 
     if (!toggleButton || !overlay || !container || !openIcon || !closeIcon) {
+      console.error('[MobileMenu] One or more required elements are not found.');
       return;
     }
 
     const openMenu = () => {
       toggleButton.setAttribute('aria-expanded', 'true');
       toggleButton.setAttribute('aria-label', 'Закрыть меню');
-      toggleButton.classList.add('fixed', 'right-4', 'top-4');
       openIcon.classList.add('hidden');
       closeIcon.classList.remove('hidden');
 
@@ -93,7 +91,6 @@ import Button from '@components/base/Button.astro';
     const closeMenu = () => {
       toggleButton.setAttribute('aria-expanded', 'false');
       toggleButton.setAttribute('aria-label', 'Открыть меню');
-      toggleButton.classList.remove('fixed', 'right-4', 'top-4');
       openIcon.classList.remove('hidden');
       closeIcon.classList.add('hidden');
 
@@ -123,16 +120,16 @@ import Button from '@components/base/Button.astro';
       }
     };
 
-    toggleButton.addEventListener('click', handleToggleClick);
-    overlay.addEventListener('click', closeMenu);
+    if (!toggleButton.dataset.listenerAttached) {
+      toggleButton.addEventListener('click', handleToggleClick);
+      overlay.addEventListener('click', closeMenu);
+      navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+      toggleButton.dataset.listenerAttached = 'true';
+    }
+  }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    document.addEventListener('astro:before-swap', () => {
-      window.removeEventListener('keydown', handleEscKey);
-      document.body.style.overflow = 'auto';
-    }, { once: true });
-  });
+  initMobileMenu();
+  document.addEventListener('astro:page-load', initMobileMenu);
 </script>
