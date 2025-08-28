@@ -22,54 +22,50 @@ import Button from '@components/base/Button.astro';
     </svg>
   </button>
 
-  <div
-      id="mobile-menu-overlay"
-      class="fixed inset-0 z-40 h-full w-full bg-black/30 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none"
-      aria-hidden="true"
-  ></div>
-
-  <div
-      id="mobile-menu-container"
-      class="fixed bottom-0 left-0 top-0 z-50 flex h-screen w-[85vw] max-w-sm transform flex-col border-r border-gray-200 bg-white shadow-lg transition-transform duration-300 ease-in-out -translate-x-full"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mobile-menu-title"
-  >
-    <div class="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4 bg-white">
-      <div id="mobile-menu-title">
-        <Logo />
-      </div>
-      <Button variant="primary" size="sm" href="/login" text="Вход" class="px-4 py-2" />
-    </div>
-
-    <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
-      {menus.map((menu, index) => (
-          <a
-              href={menu.url}
-              class="mobile-menu-link block transform text-center text-xl font-medium text-gray-600 transition-all duration-300 ease-out hover:text-cyan-600 opacity-0 translate-y-4"
-              style={`transition-delay: ${100 + index * 75}ms`}
-          >
-            {menu.name}
-          </a>
-      ))}
-    </nav>
-  </div>
+  
 </div>
 
 <script>
-  function initMobileMenu() {
+  import { menus } from './navData';
 
+  function initMobileMenu() {
     const toggleButton = document.getElementById('mobile-menu-toggle');
     const overlay = document.getElementById('mobile-menu-overlay');
     const container = document.getElementById('mobile-menu-container');
     const openIcon = document.getElementById('menu-open-icon');
     const closeIcon = document.getElementById('menu-close-icon');
-    const navLinks = document.querySelectorAll('.mobile-menu-link');
+    const navElement = container.querySelector('nav');
 
-    if (!toggleButton || !overlay || !container || !openIcon || !closeIcon) {
-      console.error('[MobileMenu] One or more required elements are not found.');
+    if (!toggleButton || !overlay || !container || !openIcon || !closeIcon || !navElement) {
       return;
     }
+
+    if (navElement.children.length === 0) {
+      menus.forEach((menu, index) => {
+        const link = document.createElement('a');
+        link.href = menu.url;
+        link.textContent = menu.name;
+        link.classList.add(
+          'mobile-menu-link',
+          'block',
+          'transform',
+          'text-center',
+          'text-xl',
+          'font-medium',
+          'text-gray-600',
+          'transition-all',
+          'duration-300',
+          'ease-out',
+          'hover:text-cyan-600',
+          'opacity-0',
+          'translate-y-4'
+        );
+        link.style.transitionDelay = `${100 + index * 75}ms`;
+        navElement.appendChild(link);
+      });
+    }
+
+    const navLinks = navElement.querySelectorAll('.mobile-menu-link');
 
     const openMenu = () => {
       toggleButton.setAttribute('aria-expanded', 'true');
@@ -120,14 +116,11 @@ import Button from '@components/base/Button.astro';
       }
     };
 
-    if (!toggleButton.dataset.listenerAttached) {
-      toggleButton.addEventListener('click', handleToggleClick);
-      overlay.addEventListener('click', closeMenu);
-      navLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-      });
-      toggleButton.dataset.listenerAttached = 'true';
-    }
+    toggleButton.addEventListener('click', handleToggleClick);
+    overlay.addEventListener('click', closeMenu);
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
   }
 
   initMobileMenu();
