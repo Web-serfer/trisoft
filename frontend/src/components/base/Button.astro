@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  text: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'normal' | 'large';
+  class?: string;
+}
+
+const { 
+  href,
+  text,
+  variant = 'primary',
+  size = 'normal',
+  class: customClass,
+  ...rest
+} = Astro.props;
+
+const baseClasses = [
+  'group',
+  'relative',
+  'font-semibold',
+  'transition-all',
+  'duration-300',
+  'transform',
+  'hover:-translate-y-0.5',
+  'inline-flex',
+  'items-center',
+  'justify-center',
+  'overflow-hidden',
+];
+
+const variantClasses = {
+  primary: [
+    'bg-gradient-to-r',
+    'from-blue-600',
+    'to-indigo-600',
+    'text-white',
+    'shadow-lg',
+    'hover:shadow-blue-500/30',
+  ],
+  secondary: [
+    'bg-white/80',
+    'backdrop-blur-sm',
+    'border-2',
+    'border-gray-200',
+    'text-gray-700',
+    'hover:border-blue-300',
+    'hover:bg-blue-50/80',
+  ],
+};
+
+const sizeClasses = {
+  normal: ['px-8', 'py-2', 'rounded-xl'],
+  large: ['px-8', 'py-4', 'rounded-2xl'],
+};
+
+const allClasses = [
+  ...baseClasses,
+  ...variantClasses[variant],
+  ...sizeClasses[size],
+  customClass,
+];
+---
+
+<a href={href} class:list={allClasses} {...rest}>
+  <span class="relative z-10">{text}</span>
+  {variant === 'primary' && (
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-700 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  )}
+  {variant === 'secondary' && (
+    <div class="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  )}
+</a>

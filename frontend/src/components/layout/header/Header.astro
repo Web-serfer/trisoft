@@ -3,6 +3,7 @@ import Logo from './Logo.astro';
 import Navbar from './Navbar.astro';
 import MobileMenu from './MobileMenu.tsx';
 import Modal from '@components/base/Modal.tsx';
+import Button from '@components/base/Button.astro';
 ---
 
 <header id="main-header" class="sticky top-0 z-50 w-full h-20">
@@ -16,9 +17,7 @@ import Modal from '@components/base/Modal.tsx';
           </nav>
         </div>
         <div class="hidden lg:flex items-center gap-x-4">
-          <a href="/login" class="group px-8 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
-            Вход
-          </a>
+          <Button variant="primary" href="/login" text="Вход" />
         </div>
         <div class="lg:hidden">
           <MobileMenu client:load />
