@@ -1,4 +1,19 @@
 ---
+import { Image } from 'astro:assets';
+
+import programmer1 from '@assets/images/slider/01.png';
+import programmer2 from '@assets/images/slider/02.png';
+import programmer3 from '@assets/images/slider/03.png';
+import programmer4 from '@assets/images/slider/04.png';
+import programmer5 from '@assets/images/slider/05.png';
+import programmer6 from '@assets/images/slider/06.png';
+import programmer7 from '@assets/images/slider/07.png';
+import programmer8 from '@assets/images/slider/08.png';
+import programmer9 from '@assets/images/slider/09.png';
+import programmer10 from '@assets/images/slider/10.png';
+import programmer11 from '@assets/images/slider/11.png';
+import programmer12 from '@assets/images/slider/12.png';
+
 const programmers = [
   {
     id: 1,
@@ -8,22 +23,27 @@ const programmers = [
     skills: ['1С:ERP', '1С:УТП', 'Интеграции API', 'Оптимизация'],
     projects: '120+',
     rating: '4.9/5',
-    image: '/images/programmers/1.jpg',
+    image: programmer1,
   },
   {
     id: 2,
     name: 'Владимир Кочнев',
     position: 'Full-stack 1С Developer',
     experience: '6+ лет опыта',
-    skills: [
-      '1С:Бухгалтерия',
-      'Web-разработка',
-      'Мобильные приложения',
-      'Битрикс24',
-    ],
+    skills: ['1С:Бухгалтерия', 'Web-разработка', 'Мобильные приложения', 'Битрикс24'],
     projects: '85+',
     rating: '4.8/5',
-    image: '/images/programmers/2.jpg',
+    image: programmer2,
+  },
+  {
+    id: 3,
+    name: 'Сергей Новиков',
+    position: 'Специалист по 1С:ЗУП',
+    experience: '7+ лет опыта',
+    skills: ['1С:ЗУП', 'Кадровый учет', 'Расчет зарплаты', 'Отчетность'],
+    projects: '100+',
+    rating: '4.8/5',
+    image: programmer3,
   },
   {
     id: 4,
@@ -33,22 +53,17 @@ const programmers = [
     skills: ['1С:БП', 'Бизнес-аналитика', 'Отчетность', 'Дашборды'],
     projects: '65+',
     rating: '4.7/5',
-    image: '/images/programmers/4.jpg',
+    image: programmer4,
   },
   {
     id: 5,
     name: 'Артём Колобков',
     position: '1С Integration Specialist',
     experience: '7+ лет опыта',
-    skills: [
-      'API интеграции',
-      '1С-сайты',
-      'Онлайн-кассы',
-      'Банковские сервисы',
-    ],
+    skills: ['API интеграции', '1С-сайты', 'Онлайн-кассы', 'Банковские сервисы'],
     projects: '95+',
     rating: '4.9/5',
-    image: '/images/programmers/5.jpg',
+    image: programmer5,
   },
   {
     id: 6,
@@ -58,7 +73,7 @@ const programmers = [
     skills: ['Мобильная платформа', '1С', 'iOS/Android', 'UI/UX дизайн'],
     projects: '50+',
     rating: '4.8/5',
-    image: '/images/programmers/6.jpg',
+    image: programmer6,
   },
   {
     id: 7,
@@ -68,58 +83,57 @@ const programmers = [
     skills: ['1С:УХ', 'Финансовый учет', 'Бюджетирование', 'МСФО'],
     projects: '110+',
     rating: '4.9/5',
-    image: '/images/programmers/7.jpg',
+    image: programmer7,
   },
-  // --- Новые программисты ---
   {
     id: 8,
-    name: 'Елена Петрова',
+    name: 'Дмитрий Алексютин',
     position: '1С:ERP Консультант-аналитик',
     experience: '7+ лет опыта',
     skills: ['Анализ требований', '1С:ERP', 'Моделирование', 'ТЗ'],
     projects: '70+',
     rating: '4.8/5',
-    image: '/images/programmers/8.jpg',
+    image: programmer8,
   },
   {
     id: 9,
-    name: 'Иван Сидоров',
+    name: 'Сергей Пушин',
     position: 'Ведущий архитектор 1С',
     experience: '12+ лет опыта',
     skills: ['HighLoad', 'Архитектура систем', 'Оптимизация', '1С:Корпорация'],
     projects: '40+',
     rating: '5.0/5',
-    image: '/images/programmers/9.jpg',
+    image: programmer9,
   },
   {
     id: 10,
-    name: 'Ольга Кузнецова',
+    name: 'Артем Попов',
     position: 'Специалист по 1С:Документооборот',
     experience: '5+ лет опыта',
     skills: ['1С:Документооборот', 'ЭДО', 'Бизнес-процессы', 'Внедрение'],
     projects: '80+',
     rating: '4.9/5',
-    image: '/images/programmers/10.jpg',
+    image: programmer10,
   },
   {
     id: 11,
-    name: 'Дмитрий Фёдоров',
+    name: 'Михайл Феськов',
     position: 'Middle 1С Developer',
     experience: '3+ года опыта',
     skills: ['1С:Розница', 'Торговое оборудование', 'СКД', 'Доработки'],
     projects: '45+',
     rating: '4.7/5',
-    image: '/images/programmers/11.jpg',
+    image: programmer11,
   },
   {
     id: 12,
-    name: 'Анна Морозова',
+    name: 'Никита Стегачёв',
     position: 'Руководитель проектов 1С',
     experience: '10+ лет опыта',
     skills: ['Управление проектами', 'Agile/Scrum', 'Бюджетирование', 'Команда'],
     projects: '55+',
     rating: '4.9/5',
-    image: '/images/programmers/12.jpg',
+    image: programmer12,
   },
 ]
 ---
@@ -162,18 +176,21 @@ const programmers = [
 
       <!-- Видимая область карусели -->
       <div class="carousel-viewport overflow-hidden">
-
         <div class="carousel-track flex">
           {programmers.map((programmer) => (
-              <div class="carousel-slide p-4"> {/* FIX: Removed key={programmer.id} */}
+              <div class="carousel-slide p-4">
                 <div
                     class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 h-full flex flex-col">
                   {/* Аватар и основная информация */}
                   <div class="text-center mb-6">
                     <div class="relative inline-block mb-4">
-                      <img src={programmer.image} alt={programmer.name}
-                           class="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-lg object-cover"/>
-
+                      <Image
+                          src={programmer.image}
+                          alt={programmer.name}
+                          width={96}
+                          height={96}
+                          class="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-lg object-cover"
+                      />
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-1">{programmer.name}</h3>
                     <p class="text-blue-600 font-semibold mb-2">{programmer.position}</p>
@@ -185,7 +202,7 @@ const programmers = [
                     <div class="flex flex-wrap gap-2">
                       {programmer.skills.map((skill) => (
                           <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border border-gray-200">{skill}</span>
-                      ))} {/* FIX: Removed key={index} and unused 'index' parameter */}
+                      ))}
                     </div>
                   </div>
                   {/* Статистика */}
@@ -214,24 +231,20 @@ const programmers = [
     .carousel-track {
         transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .carousel-slide {
         flex-shrink: 0;
         width: 100%;
     }
-
     @media (min-width: 1024px) {
         .carousel-slide {
             width: calc(100% / 3);
         }
     }
-
     @media (min-width: 768px) and (max-width: 1023px) {
         .carousel-slide {
             width: 50%;
         }
     }
-
     @media (max-width: 767px) {
         .prev-btn, .next-btn {
             display: none;
@@ -269,7 +282,6 @@ const programmers = [
         totalSlides = 0;
         return;
       }
-      // Пересчитываем количество "страниц" в карусели
       totalSlides = Math.ceil(programmers.length / cardsPerView);
       if (currentIndex >= totalSlides) {
         currentIndex = totalSlides > 0 ? totalSlides - 1 : 0;
