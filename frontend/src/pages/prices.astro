@@ -1,1 +1,25 @@
-<h2>Prices page</h2>
+---
+import Layout from '@layouts/Layout.astro';
+import { pricesData } from '@components/prices/prices-data';
+import PriceCard from '@components/prices/PriceCard.astro';
+import SectionHeader from '@components/base/SectionHeader.astro';
+---
+
+<Layout 
+  title="Стоимость работы программистов 1С"
+  description="Узнайте стоимость услуг наших сертифицированных специалистов 1С. Предлагаем гибкие условия для задач любой сложности."
+>
+  <section class="section-padding bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        title="Стоимость работы программистов 1С"
+        description="Мы предлагаем услуги специалистов разного уровня для решения любых задач по автоматизации вашего бизнеса на платформе 1С."
+      />
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {pricesData.map(programmer => (
+          <PriceCard programmer={programmer} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

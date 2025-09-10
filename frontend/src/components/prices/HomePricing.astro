@@ -1,0 +1,25 @@
+---
+import { pricesData } from './prices-data';
+import PriceCard from './PriceCard.astro';
+import SectionHeader from '@components/base/SectionHeader.astro';
+import Button from '@components/base/Button.astro';
+
+const homePageProgrammers = pricesData.slice(0, 3);
+---
+
+<section class="section-padding bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeader
+      title="Наши специалисты"
+      description="Команда опытных и сертифицированных программистов 1С, готовых решить ваши задачи."
+    />
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {homePageProgrammers.map(programmer => (
+        <PriceCard programmer={programmer} />
+      ))}
+    </div>
+    <div class="mt-16 text-center">
+      <Button href="/programmers" text="Все специалисты и цены" variant="secondary" size="large" />
+    </div>
+  </div>
+</section>

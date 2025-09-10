@@ -24,9 +24,5 @@ export const menus = [
 	{
 		name: 'О Компании',
 		url: '/about',
-	},
-	{
-		name: 'Контакты',
-		url: '/contacts',
-	},
+	}
 ]
