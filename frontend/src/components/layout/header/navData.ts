@@ -14,13 +14,13 @@ export const menus = [
 		],
 	},
 	{
-		name: 'Блог',
-		url: '/blog',
+		name: 'Кейсы',
+		url: '/cases',
 	},
-	{
-		name: 'Цены',
-		url: '/prices',
-	},
+    {
+        name: 'Блог',
+        url: '/blog',
+    },
 	{
 		name: 'О Компании',
 		url: '/about',

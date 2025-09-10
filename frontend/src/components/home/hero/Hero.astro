@@ -1,5 +1,6 @@
 ---
 import Button from '@components/base/Button.astro'
+import { Icon } from 'astro-icon/components';
 
 const benefits = [
 	{
@@ -10,7 +11,7 @@ const benefits = [
 		iconShadow: 'group-hover:shadow-blue-500/40',
 		glow: 'shadow-blue-500/20',
 		hoverDecorator: 'group-hover:from-blue-500/30',
-		icon: `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`,
+		icon: 'automation',
 		title: 'Полная автоматизация',
 		description: 'Учет финансов, склада, продаж и персонала',
 	},
@@ -22,7 +23,7 @@ const benefits = [
 		iconShadow: 'group-hover:shadow-cyan-500/40',
 		glow: 'shadow-cyan-500/20',
 		hoverDecorator: 'group-hover:from-cyan-500/30',
-		icon: `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"></path></svg>`,
+		icon: 'integration',
 		title: 'Интеграция систем',
 		description: 'CRM, сайты, онлайн-кассы и банковские сервисы',
 	},
@@ -34,7 +35,7 @@ const benefits = [
 		iconShadow: 'group-hover:shadow-rose-500/40',
 		glow: 'shadow-rose-500/20',
 		hoverDecorator: 'group-hover:from-rose-500/30',
-		icon: `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+		icon: 'support',
 		title: 'Техподдержка 24/7',
 		description: 'Быстрое реагирование и консультации специалистов',
 	},
@@ -73,7 +74,7 @@ const benefits = [
                     class:list={["relative flex h-20 w-20 items-center justify-center rounded-2xl shadow-xl transition-all duration-700 ease-out group-hover:scale-105", benefit.iconGradient, benefit.iconShadow]}>
                   <div class="absolute inset-0 rounded-2xl bg-white/10"></div>
                   <div class="relative">
-                    <Fragment set:html={benefit.icon}/>
+                    <Icon name={benefit.icon} class="w-8 h-8 text-white" /> {/* Changed */}
                   </div>
                 </div>
               </div>

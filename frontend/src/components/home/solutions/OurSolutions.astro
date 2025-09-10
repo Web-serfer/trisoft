@@ -120,7 +120,7 @@ const features = [
     <div class="mx-auto mt-16 max-w-none">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {features.map((feature) => (
-            <div class={`group grid [grid-template-areas:'stack'] rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:cursor-pointer ${feature.styling.bgColor}`}>
+            <div class={`group grid [grid-template-areas:'stack'] rounded-3xl p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:cursor-pointer ${feature.styling.bgColor} ${feature.styling.border}`}>
 
               {/* --- ЛИЦЕВАЯ СТОРОНА --- */}
               <div class="[grid-area:stack] flex flex-col transition-opacity duration-500 ease-in-out group-hover:opacity-0">
