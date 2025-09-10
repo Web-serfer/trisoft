@@ -3,6 +3,7 @@ import Logo from './Logo.astro'
 import Navbar from './Navbar.astro'
 import MobileMenu from './MobileMenu.astro'
 import Button from '@components/base/Button.astro'
+import { Icon } from 'astro-icon/components'; // Added import
 ---
 
 <header id="main-header" class="w-full h-20">
@@ -17,7 +18,9 @@ import Button from '@components/base/Button.astro'
                     </nav>
                 </div>
                 <div class="hidden lg:flex items-center gap-x-4">
-                    <Button variant="primary" href="/login" text="Вход" />
+                    <a href="https://wa.me/79001234567?text=Здравствуйте%2C%20меня%20интересует%20автоматизация%20бизнеса%20на%201С." target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors duration-300 shadow-md">
+                        <Icon name="whatsapp" class="w-6 h-6" />
+                    </a>
                 </div>
                 <div class="lg:hidden">
                     <MobileMenu />
@@ -58,3 +61,29 @@ import Button from '@components/base/Button.astro'
     }
 </style>
 
+<script>
+  const headerInnerContainer = document.getElementById('header-inner-container');
+  const scrollLine = document.getElementById('scroll-line');
+
+  const scrollHandler = () => {
+    // Ensure the header always has the default opaque classes
+    headerInnerContainer.classList.add('bg-white', 'shadow-sm');
+    headerInnerContainer.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-md', 'rounded-b-xl');
+
+    // Control the scroll line animation
+    const maxScrollDepth = 200; // Adjust this value as needed
+    const scrollProgress = Math.min(1, window.scrollY / maxScrollDepth);
+    scrollLine.style.width = `${scrollProgress * 100}%`;
+  };
+
+  window.addEventListener('scroll', scrollHandler);
+
+  // Run on page load to ensure correct initial state
+  document.addEventListener('astro:page-load', () => {
+    scrollHandler();
+  });
+  // Cleanup the event listener when the component is unmounted
+  document.addEventListener('astro:before-swap', () => {
+    window.removeEventListener('scroll', scrollHandler)
+  })
+</script>

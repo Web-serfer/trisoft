@@ -5,7 +5,7 @@ import Footer from '@components/layout/footer/Footer.astro';
 import Modal from '@components/base/Modal.astro';
 import Breadcrumbs from '@components/base/Breadcrumbs.astro';
 import Logo from '@components/layout/header/Logo.astro';
-import Button from '@components/base/Button.astro';
+import { Icon } from 'astro-icon/components'; // Keep this import
 
 export interface Props {
 	title: string
@@ -55,7 +55,9 @@ const finalTitle = `${title} | ${siteName}`
       <div id="mobile-menu-title">
         <Logo />
       </div>
-      <Button variant="primary" size="small" href="/login" text="Вход" class="px-4 py-2" />
+      <a href="https://wa.me/79001234567?text=Здравствуйте%2C%20меня%20интересует%20автоматизация%20бизнеса%20на%201С." target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp" class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors duration-300 shadow-md">
+        <Icon name="whatsapp" class="w-6 h-6" />
+      </a>
     </div>
 
     <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">
@@ -64,4 +66,3 @@ const finalTitle = `${title} | ${siteName}`
   </div>
 </body>
 </html>
-
