@@ -1,10 +1,11 @@
 ---
 import '@styles/global.css'
-import Header from '@components/layout/header/Header.astro' // Убедитесь, что пути верны
-import Footer from '@components/layout/footer/Footer.astro' // Убедитесь, что пути верны
-import Modal from '@components/base/Modal.astro'
-import Logo from '@components/layout/header/Logo.astro'
-import Button from '@components/base/Button.astro'
+import HeaderGroup from '@components/layout/header/HeaderGroup.astro';
+import Footer from '@components/layout/footer/Footer.astro';
+import Modal from '@components/base/Modal.astro';
+import Breadcrumbs from '@components/base/Breadcrumbs.astro';
+import Logo from '@components/layout/header/Logo.astro';
+import Button from '@components/base/Button.astro';
 
 export interface Props {
 	title: string
@@ -30,7 +31,8 @@ const finalTitle = `${title} | ${siteName}`
   <link rel="canonical" href={canonicalURL} />
 </head>
 <body>
-<Header />
+<HeaderGroup />
+{Astro.url.pathname !== '/' && <Breadcrumbs />}
 <main>
   <slot />
 </main>
@@ -53,7 +55,7 @@ const finalTitle = `${title} | ${siteName}`
       <div id="mobile-menu-title">
         <Logo />
       </div>
-      <Button variant="primary" size="sm" href="/login" text="Вход" class="px-4 py-2" />
+      <Button variant="primary" size="small" href="/login" text="Вход" class="px-4 py-2" />
     </div>
 
     <nav class="flex flex-grow flex-col items-center justify-start gap-4 p-4 pt-8 bg-white overflow-y-auto">

@@ -8,7 +8,8 @@
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/assets/*"],
-      "@stores/*": ["src/stores/*"]
+      "@stores/*": ["src/stores/*"],
+      "@lib/*": ["src/lib/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"

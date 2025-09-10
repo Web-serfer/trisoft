@@ -6,3 +6,17 @@
 .section-padding {
   @apply py-16 sm:py-24;
 }
+
+/*
+  Общий класс для ссылок
+*/
+.link-primary {
+  @apply text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-300;
+}
+
+/*
+  Стиль для иконки-ссылки "Домой" в хлебных крошках
+*/
+.home-link-icon {
+  @apply text-gray-500 hover:text-blue-600 transition-colors duration-300;
+}

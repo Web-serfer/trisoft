@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<div id="top-header" class="bg-gray-100 border-b border-gray-200 text-sm text-gray-600 transition-transform duration-300 ease-in-out">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-10">
+      <div>
+        <!-- Место под слайдер статей -->
+        <span class="text-gray-400">Слайдер статей</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="tel:+78005553535" class="flex items-center hover:text-blue-600 transition-colors">
+            <Icon name="phone" class="w-4 h-4 mr-2" />
+          <span>8 (800) 555-35-35</span>
+        </a>
+        <a href="mailto:info@trisoft.ru" class="flex items-center hover:text-blue-600 transition-colors">
+            <Icon name="email" class="w-4 h-4 mr-2" />
+          <span>info@trisoft.ru</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const topHeader = document.getElementById('top-header');
+    if (!topHeader) return;
+
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (window.scrollY > 50 && window.scrollY > lastScrollY) {
+        topHeader.style.transform = 'translateY(-100%)';
+      } else {
+        topHeader.style.transform = 'translateY(0)';
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Cleanup
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', handleScroll);
+    });
+  });
+</script>

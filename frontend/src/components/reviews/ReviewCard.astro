@@ -27,19 +27,20 @@ const initials = getInitials(review.name);
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-100/50 -z-10"></div>
 
     <div class="p-6 flex-grow">
-        <!-- Блок с настоящим обтеканием -->
         <div class="review-text-wrapper mb-6">
-            <!-- Инициалы с float и shape-outside -->
             <div class="review-initials float-left mr-4 mb-2">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {initials}
+                <div class="flex-shrink-0 w-16 h-16 rounded-full bg-white/50 border border-white/80 shadow-md flex items-center justify-center group-hover:bg-white/70 transition-all duration-300">
+                    <span class="text-xl font-bold text-gray-700 group-hover:text-blue-600 transition-colors duration-300">{initials}</span>
                 </div>
             </div>
-
-            <!-- Текст, который ОБТЕКАЕТ инициалы -->
-            <p class="text-gray-800 leading-relaxed text-base md:text-lg font-medium">
-                “{review.text}”
-            </p>
+            <div class="relative">
+                <svg class="absolute top-0 left-0 w-8 h-8 text-gray-200/80 transform -translate-x-3 -translate-y-3" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M9.333 22.667h4L16 16V9.333H2.667v9.334L6.667 24H9.333v-1.333zM25.333 22.667h4L32 16V9.333H18.667v9.334L22.667 24h2.666v-1.333z"></path>
+                </svg>
+                <p class="relative text-gray-700 italic leading-relaxed">
+                    {review.text}
+                </p>
+            </div>
         </div>
     </div>
 
