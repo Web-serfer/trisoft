@@ -1,5 +1,6 @@
 ---
 import Button from '@components/base/Button.astro'
+import SectionHeader from '@components/base/SectionHeader.astro'
 
 const features = [
 	{
@@ -110,17 +111,12 @@ const features = [
 ] as const
 ---
 
-<section class="py-16 sm:py-24 bg-gray-50">
+<section class="section-padding bg-gray-50">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:text-center">
-      <h2 class="mt-2 font-bold tracking-tight text-gray-900">
-        <span class="block text-3xl sm:text-4xl">Комплексные решения</span>
-        <span class="block text-4xl sm:text-5xl mt-1">для вашего бизнеса</span>
-      </h2>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
-        Мы предлагаем готовые пакеты для автоматизации ключевых бизнес-процессов с использованием проверенных технологий 1С.
-      </p>
-    </div>
+    <SectionHeader
+      title="Комплексные решения<br>для вашего бизнеса"
+      description="Мы предлагаем готовые пакеты для автоматизации ключевых бизнес-процессов с использованием проверенных технологий 1С."
+    />
     <div class="mx-auto mt-16 max-w-none">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {features.map((feature) => (

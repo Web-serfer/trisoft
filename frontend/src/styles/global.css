@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+/*
+  Use this class to apply consistent vertical padding to all sections.
+*/
+.section-padding {
+  @apply py-20;
+}

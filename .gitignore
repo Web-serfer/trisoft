@@ -32,3 +32,6 @@ payload-types.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Файл Gemini
+GEMINI.md

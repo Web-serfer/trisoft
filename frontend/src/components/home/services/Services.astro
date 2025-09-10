@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import Button from '@components/base/Button.astro'
+import SectionHeader from '@components/base/SectionHeader.astro'
 
 // Разработка
 import devMainImage from '@assets/images/filtersCards/development-main.avif'
@@ -135,13 +136,12 @@ const cardsData = [
 const filterLabelsMap = new Map(filtersData.map((f) => [f.id, f.label]))
 ---
 
-<section class="py-20">
+<section class="section-padding">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Экспертные услуги 1С</h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto">Профессиональные решения для автоматизации и развития вашего
-        бизнеса</p>
-    </div>
+    <SectionHeader
+      title="Экспертные услуги 1С"
+      description="Профессиональные решения для автоматизации и развития вашего бизнеса"
+    />
 
     <div class="flex flex-wrap justify-center gap-4 mb-12">
       {filtersData.map((filter, index) => (
