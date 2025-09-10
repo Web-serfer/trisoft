@@ -28,7 +28,13 @@ import Button from '@components/base/Button.astro';
 <script>
   import { menus } from './navData';
 
+  let isMenuInitialized = false;
+
   function initMobileMenu() {
+    if (isMenuInitialized) {
+      return;
+    }
+
     const toggleButton = document.getElementById('mobile-menu-toggle');
     const overlay = document.getElementById('mobile-menu-overlay');
     const container = document.getElementById('mobile-menu-container');
@@ -73,7 +79,7 @@ import Button from '@components/base/Button.astro';
       openIcon.classList.add('hidden');
       closeIcon.classList.remove('hidden');
 
-      container.classList.remove('-translate-x-full');
+      container.classList.remove('hidden');
       overlay.classList.remove('opacity-0', 'pointer-events-none');
 
       navLinks.forEach(link => {
@@ -90,7 +96,7 @@ import Button from '@components/base/Button.astro';
       openIcon.classList.remove('hidden');
       closeIcon.classList.add('hidden');
 
-      container.classList.add('-translate-x-full');
+      container.classList.add('hidden');
       overlay.classList.add('opacity-0', 'pointer-events-none');
 
       navLinks.forEach(link => {
@@ -121,6 +127,8 @@ import Button from '@components/base/Button.astro';
     navLinks.forEach(link => {
       link.addEventListener('click', closeMenu);
     });
+
+    isMenuInitialized = true;
   }
 
   initMobileMenu();

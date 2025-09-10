@@ -5,28 +5,28 @@ import MobileMenu from './MobileMenu.astro'
 import Button from '@components/base/Button.astro'
 ---
 
-<header id="main-header" class="sticky top-0 z-50 w-full h-20">
-  <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300 relative">
-    <div class="max-w-7xl mx-auto h-full px-4">
-      <div class="flex items-center justify-between h-full select-none">
-        <Logo />
-        <!-- ✅ УЛУЧШЕНИЕ: Классы `hidden` и `lg:flex` перенесены на родительский div.
-             Теперь этот блок полностью отсутствует на мобильных, а не просто пустует. -->
-        <div class="hidden lg:flex flex-1 justify-center">
-          <nav class="flex items-center">
-            <Navbar />
-          </nav>
+<!-- УБРАЛИ sticky top-0 z-50 отсюда -->
+<header id="main-header" class="w-full h-20">
+    <div id="header-inner-container" class="h-full bg-white shadow-sm transition-all duration-300 relative">
+        <!-- ... остальной код без изменений ... -->
+        <div class="max-w-7xl mx-auto h-full px-4">
+            <div class="flex items-center justify-between h-full select-none">
+                <Logo />
+                <div class="hidden lg:flex flex-1 justify-center">
+                    <nav class="flex items-center">
+                        <Navbar />
+                    </nav>
+                </div>
+                <div class="hidden lg:flex items-center gap-x-4">
+                    <Button variant="primary" href="/login" text="Вход" />
+                </div>
+                <div class="lg:hidden">
+                    <MobileMenu />
+                </div>
+            </div>
         </div>
-        <div class="hidden lg:flex items-center gap-x-4">
-          <Button variant="primary" href="/login" text="Вход" />
-        </div>
-        <div class="lg:hidden">
-          <MobileMenu />
-        </div>
-      </div>
+        <div id="scroll-line" class="absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300" style="width: 0;"></div>
     </div>
-    <div id="scroll-line" class="absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300" style="width: 0;"></div>
-  </div>
 </header>
 
 <style>

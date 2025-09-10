@@ -3,7 +3,43 @@ import TopHeader from './TopHeader.astro';
 import Header from './Header.astro';
 ---
 
-<div class="sticky top-0 z-50">
-  <TopHeader />
-  <Header />
+<div id="site-header-container" class="sticky top-0 z-50 transition-transform duration-300 ease-in-out">
+    <TopHeader />
+    <Header />
 </div>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const headerContainer = document.getElementById('site-header-container');
+        const topHeader = document.getElementById('top-header');
+
+        if (!headerContainer || !topHeader) return;
+
+        let lastScrollY = window.scrollY;
+        const scrollThreshold = 50;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const topHeaderHeight = topHeader.offsetHeight;
+
+            // Скроллим вниз
+            if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                // Сдвигаем весь контейнер вверх на высоту TopHeader
+                headerContainer.style.transform = `translateY(-${topHeaderHeight}px)`;
+            } 
+            // Скроллим вверх
+            else {
+                // Возвращаем контейнер в исходное положение
+                headerContainer.style.transform = 'translateY(0)';
+            }
+
+            lastScrollY = currentScrollY < 0 ? 0 : currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        document.addEventListener('astro:before-swap', () => {
+            window.removeEventListener('scroll', handleScroll);
+        });
+    });
+</script>
