@@ -1,0 +1,26 @@
+---
+
+import Layout from '@layouts/Layout.astro';
+import ReviewCard from '@components/reviews/ReviewCard.astro';
+import SectionHeader from '@components/base/SectionHeader.astro';
+import { reviews } from '@components/reviews/reviews';
+
+const pageTitle = 'Отзывы наших клиентов';
+const pageDescription = 'Узнайте, что говорят наши клиенты о работе с компанией Трисофт. Реальные отзывы и истории успеха.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <section class="section-padding bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+                    title="Отзывы наших клиентов"
+                    description="Мы гордимся своей работой и ценим каждого клиента. Вот что они говорят о нас."
+            />
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {reviews.map(review => (
+                        <ReviewCard review={review} />
+                ))}
+            </div>
+        </div>
+    </section>
+</Layout>

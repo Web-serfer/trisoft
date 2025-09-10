@@ -14,13 +14,15 @@
 		"check": "biome check --apply ."
 	},
 	"dependencies": {
-		"@astrojs/vercel": "^8.2.6",
-		"@tailwindcss/vite": "^4.1.12",
+		"@astrojs/solid-js": "^5.1.1",
+		"@astrojs/vercel": "^8.2.7",
+		"@tailwindcss/vite": "^4.1.13",
 		"astro": "^5.13.3",
 		"astro-icon": "^1.1.5",
 		"nanostores": "^1.0.1",
 		"shared-types": "workspace:*",
-		"tailwindcss": "^4.1.12"
+		"solid-js": "^1.9.9",
+		"tailwindcss": "^4.1.13"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.2"

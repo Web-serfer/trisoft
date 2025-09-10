@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /*
-  Use this class to apply consistent vertical padding to all sections.
+  Классы для секции - вертикальные паддинги
 */
 .section-padding {
-  @apply py-20;
+  @apply py-16 sm:py-24;
 }

@@ -1,0 +1,47 @@
+---
+import ReviewCard from '@components/reviews/ReviewCard.astro';
+import SectionHeader from '@components/base/SectionHeader.astro';
+import Button from '@components/base/Button.astro';
+
+import avatar1 from '@assets/images/slider/01.png';
+import avatar2 from '@assets/images/slider/02.png';
+import avatar3 from '@assets/images/slider/03.png';
+
+const reviews = [
+  {
+    name: 'Алексей Петров',
+    company: 'ООО "СтройМастер"',
+    avatar: avatar1,
+    text: 'Команда Трисофт проявила высокий профессионализм при внедрении 1С:ERP. Все наши требования были учтены, а система работает стабильно и быстро. Рекомендуем!',
+  },
+  {
+    name: 'Елена Сидорова',
+    company: 'Торговый дом "Прогресс"',
+    avatar: avatar2,
+    text: 'Благодаря Трисофт мы автоматизировали складской учет и значительно сократили время на обработку заказов. Очень довольны результатом и качеством поддержки.',
+  },
+  {
+    name: 'Иван Иванов',
+    company: 'Производственная компания "Металлург"',
+    avatar: avatar3,
+    text: 'Разработанный мобильный клиент для 1С превзошел все ожидания. Наши менеджеры теперь могут работать с базой данных из любой точки мира. Спасибо!',
+  },
+];
+---
+
+<section class="section-padding bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeader
+      title="Нам доверяют"
+      description="Мы гордимся своей работой и ценим каждого клиента. Вот что они говорят о нас."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {reviews.map(review => (
+        <ReviewCard review={review} />
+      ))}
+    </div>
+    <div class="text-center mt-16">
+      <Button href="/reviews" text="Смотреть все отзывы" variant="primary" size="large" />
+    </div>
+  </div>
+</section>
