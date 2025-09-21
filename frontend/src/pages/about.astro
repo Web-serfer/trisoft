@@ -1,13 +1,23 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import AboutTimeline from '@components/about/AboutTimeline.astro';
+import SectionHeader from '@components/base/SectionHeader.astro';
 
-const pageTitle = 'О Компании '
-const pageDescription =
-    'Страница о компании'
+const pageTitle = 'О Компании'
+const pageDescription = 'Узнайте больше о нашей истории, миссии и команде экспертов, которые помогают бизнесу расти с помощью IT-решений.'
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-    <AboutTimeline />
+    <main class="bg-white section-padding">
+        <div class="max-w-7xl mx-auto px-4">
+            <header class="mb-8 text-center">
+                <SectionHeader
+                    title="О нашей компании"
+                    subtitle="Мы — ваш надежный партнер в мире 1С и IT-аутсорсинга"
+                />
+            </header>
+            <AboutTimeline />
+        </div>
+    </main>
 </Layout>
 
