@@ -1,5 +1,9 @@
 ---
-import { menus } from './navData.ts'
+import { menus as allMenus } from './navData.ts'
+
+const { pathname } = Astro.url
+
+const menus = pathname === '/' ? allMenus.filter((menu) => menu.url !== '/') : allMenus
 ---
 
 <nav class="flex items-center gap-x-4">
@@ -12,11 +16,17 @@ import { menus } from './navData.ts'
             class="flex items-center gap-x-1 px-3 py-2 font-medium tracking-wide text-gray-600 duration-200 ease-out hover:text-blue-500"
           >
             {menu.name}
-            <svg class="w-4 h-4 fill-current transform transition-transform duration-300 group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg
+              class="h-4 w-4 transform fill-current transition-transform duration-300 group-hover:rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
               <path d="M10 14l-5-5h10z" />
             </svg>
           </a>
-          <div class="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+          <div
+            class="absolute left-0 mt-2 w-56 translate-y-2 transform rounded-md bg-white shadow-lg opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 invisible group-hover:visible"
+          >
             <div class="py-1">
               {menu.children.map((child) => (
                 <a
@@ -32,10 +42,12 @@ import { menus } from './navData.ts'
       ) : (
         <a
           href={menu.url}
-          class="group relative flex items-center justify-center w-full px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:py-0 sm:mb-0 md:w-auto text-gray-600 hover:text-blue-500"
+          class="group relative flex w-full items-center justify-center px-3 py-2 font-medium tracking-wide text-gray-600 duration-200 ease-out hover:text-blue-500 sm:py-0 md:w-auto text-center sm:mb-0"
         >
           {menu.name}
-          <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0"></span>
+          <span
+            class="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-500 transition-all duration-300 ease-out group-hover:left-0 group-hover:w-full"
+          ></span>
         </a>
       )}
     </div>
@@ -44,6 +56,6 @@ import { menus } from './navData.ts'
 
 <style>
   a.active {
-    color: #3D6BFF; /* blue-500 */
+    color: #3d6bff; /* blue-500 */
   }
 </style>

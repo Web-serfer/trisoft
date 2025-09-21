@@ -1,0 +1,89 @@
+---
+import { Image, type ImageMetadata } from 'astro:assets'
+
+export interface Props {
+    caseItem: {
+        id: number
+        title: string
+        client: string
+        industry: string
+        description: string
+        tags: string[]
+        image: ImageMetadata
+        link: string
+    }
+}
+
+const { caseItem } = Astro.props
+---
+
+<a href={caseItem.link} class="case-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-300 ease-in-out hover:shadow-xl md:flex-row">
+
+    <!-- Изображение -->
+    <div class="relative h-40 overflow-hidden md:h-auto md:w-2/5">
+        <Image src={caseItem.image} alt={caseItem.title} class="case-img h-full w-full object-cover" />
+        <!-- Этот оверлей будет анимироваться, чтобы создать эффект "шторки" -->
+        <div class="case-overlay absolute inset-0 bg-white"></div>
+    </div>
+
+    <!-- Контент -->
+    <div class="flex flex-col p-5 case-content">
+
+		<span class="text-xs font-medium text-indigo-600 uppercase tracking-wide">
+			{caseItem.industry}
+		</span>
+
+        <h3 class="case-title mt-1 text-lg font-bold text-gray-800 transition-colors duration-300 ease-in-out group-hover:text-indigo-600">
+            {caseItem.title}
+        </h3>
+
+        <p class="case-desc mt-2 line-clamp-3 text-sm text-gray-600">
+            {caseItem.description}
+        </p>
+
+        <div class="case-tags mt-auto flex flex-wrap gap-2 pt-2">
+            {caseItem.tags.map(tag => (
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-700">
+					{tag}
+				</span>
+            ))}
+        </div>
+    </div>
+</a>
+
+<style>
+    .case-card {
+        /* Добавляем плавный переход для тени и трансформации "подъема" */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .case-card:hover {
+        /* Приподнимаем карточку при наведении */
+        transform: translateY(-5px);
+    }
+
+    /* --- Магия анимации изображения --- */
+
+    .case-overlay {
+        /* Устанавливаем точку трансформации слева по центру */
+        transform-origin: left;
+        /* Добавляем плавный переход для трансформации */
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); /* красивая ease-функция */
+    }
+
+    .case-card:hover .case-overlay {
+        /* При наведении на карточку, сжимаем оверлей до нуля по горизонтали */
+        /* Это создает эффект, будто изображение "раскрывается" слева направо */
+        transform: scaleX(0);
+    }
+
+    /* Небольшой бонус: делаем изображение чуть-чуть больше,
+       чтобы при наведении оно слегка приближалось */
+    .case-img {
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .case-card:hover .case-img {
+        transform: scale(1.05);
+    }
+
+</style>

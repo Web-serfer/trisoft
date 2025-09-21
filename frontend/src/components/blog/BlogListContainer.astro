@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BlogPostCard from '@components/blog/BlogPostCard.astro';
+import BlogSearch from '@components/blog/BlogSearch.astro';
+
+interface Props {
+    posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div id="blog-list-container">
+    <BlogSearch />
+
+    <div id="posts-grid" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map(post => (
+                <div class="post-card-wrapper transition-opacity duration-300">
+                    <BlogPostCard post={post} />
+                </div>
+        ))}
+    </div>
+
+    <p id="no-results" class="mt-12 text-center text-lg text-neutral-500 hidden">
+        К сожалению, по вашему запросу ничего не найдено.
+    </p>
+</div>
+
+<script define:vars={{ posts }}>
+    const searchInput = document.querySelector('#blog-list-container input[type="search"]');
+    const postCardWrappers = document.querySelectorAll('.post-card-wrapper');
+    const noResultsMessage = document.getElementById('no-results');
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        posts.forEach((post, index) => {
+            const wrapper = postCardWrappers[index];
+            if (!wrapper) return;
+
+            const title = post.data.title.toLowerCase();
+            const description = post.data.description.toLowerCase();
+            const category = post.data.category.toLowerCase();
+
+            const isVisible =
+                title.includes(searchTerm) ||
+                description.includes(searchTerm) ||
+                category.includes(searchTerm);
+
+            if (isVisible) {
+                wrapper.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                wrapper.classList.add('hidden');
+            }
+        });
+
+        noResultsMessage.classList.toggle('hidden', visibleCount > 0);
+    });
+</script>
