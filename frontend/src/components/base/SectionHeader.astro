@@ -1,14 +1,16 @@
 ---
 interface Props {
   title: string;
-  description: string;
+  subtitle?: string;
+  description?: string;
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
-const { title, description, as: Tag = 'h2' } = Astro.props;
+const { title, subtitle, description, as: Tag = 'h2' } = Astro.props;
 ---
 
 <div class="text-center mb-16">
   <Tag class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" set:html={title}></Tag>
-  <p class="text-lg text-gray-600 max-w-3xl mx-auto" set:html={description}></p>
+  {subtitle && <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-4" set:html={subtitle}></p>}
+  {description && <p class="text-lg text-gray-600 max-w-3xl mx-auto" set:html={description}></p>}
 </div>

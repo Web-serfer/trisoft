@@ -2,60 +2,110 @@
 import type { CollectionEntry } from 'astro:content';
 import BlogPostCard from '@components/blog/BlogPostCard.astro';
 import BlogSearch from '@components/blog/BlogSearch.astro';
+import Pagination from '@components/blog/Pagination.jsx';
+import { pagination } from '../../stores/paginationStore';
 
 interface Props {
     posts: CollectionEntry<'blog'>[];
 }
 
 const { posts } = Astro.props;
+const pageSize = 3;
+const initialTotalPages = Math.ceil(posts.length / pageSize);
+
+// Set the initial total pages in the store on the server
+pagination.setKey('totalPages', initialTotalPages);
 ---
 
 <div id="blog-list-container">
     <BlogSearch />
 
     <div id="posts-grid" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map(post => (
-                <div class="post-card-wrapper transition-opacity duration-300">
-                    <BlogPostCard post={post} />
-                </div>
+        {posts.map((post) => (
+            <div class="post-card-wrapper transition-opacity duration-300">
+                <BlogPostCard post={post} />
+            </div>
         ))}
     </div>
 
-    <p id="no-results" class="mt-12 text-center text-lg text-neutral-500 hidden">
+    <p id="no-results" class="mt-12 hidden text-center text-lg text-neutral-500">
         К сожалению, по вашему запросу ничего не найдено.
     </p>
+
+    <!-- Render pagination only if needed, pass totalPages for the Solid component to use -->
+    {initialTotalPages > 1 && <Pagination client:load />}
 </div>
 
-<script define:vars={{ posts }}>
+<script define:vars={{ posts, pageSize }}>
+    import { pagination } from '../../stores/paginationStore';
+
     const searchInput = document.querySelector('#blog-list-container input[type="search"]');
     const postCardWrappers = document.querySelectorAll('.post-card-wrapper');
     const noResultsMessage = document.getElementById('no-results');
 
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        let visibleCount = 0;
+    function updateView() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const currentStore = pagination.get();
 
-        posts.forEach((post, index) => {
-            const wrapper = postCardWrappers[index];
-            if (!wrapper) return;
+        // 1. Filter posts by search term
+        const filteredPosts = posts
+            .map((post, index) => {
+                const title = post.data.title.toLowerCase();
+                const description = post.data.description.toLowerCase();
+                const category = post.data.category.toLowerCase();
+                const isMatch = title.includes(searchTerm) || description.includes(searchTerm) || category.includes(searchTerm);
+                return { index, isMatch };
+            })
+            .filter(p => p.isMatch);
 
-            const title = post.data.title.toLowerCase();
-            const description = post.data.description.toLowerCase();
-            const category = post.data.category.toLowerCase();
+        const filteredIndexes = filteredPosts.map(p => p.index);
 
-            const isVisible =
-                title.includes(searchTerm) ||
-                description.includes(searchTerm) ||
-                category.includes(searchTerm);
+        // 2. Update total pages in the store if it has changed
+        const newTotalPages = Math.ceil(filteredIndexes.length / pageSize);
+        if (newTotalPages !== currentStore.totalPages) {
+            // This check prevents an infinite loop
+            pagination.setKey('totalPages', newTotalPages > 0 ? newTotalPages : 1);
+        }
+        
+        // 3. If current page is now out of bounds, go to page 1.
+        // The store update will trigger updateView again.
+        if (currentStore.currentPage > newTotalPages && newTotalPages > 0) {
+            pagination.setKey('currentPage', 1);
+            return;
+        }
 
-            if (isVisible) {
-                wrapper.classList.remove('hidden');
-                visibleCount++;
-            } else {
-                wrapper.classList.add('hidden');
-            }
+        // 4. Get the slice of posts for the current page
+        const startIndex = (currentStore.currentPage - 1) * pageSize;
+        const paginatedIndexes = new Set(filteredIndexes.slice(startIndex, startIndex + pageSize));
+
+        // 5. Update the DOM
+        postCardWrappers.forEach((wrapper, index) => {
+            const shouldShow = paginatedIndexes.has(index);
+            wrapper.classList.toggle('hidden', !shouldShow);
         });
 
-        noResultsMessage.classList.toggle('hidden', visibleCount > 0);
+        noResultsMessage.classList.toggle('hidden', filteredIndexes.length > 0);
+    }
+
+    // --- Event Listeners ---
+
+    // When user types in search, reset to page 1 and update
+    searchInput.addEventListener('input', () => {
+        pagination.setKey('currentPage', 1);
+        updateView();
     });
+
+    // When page changes via pagination component, update
+    const unsubscribe = pagination.subscribe((current, old) => {
+        // Only run if the page or totalPages changed to avoid loops
+        if (current.currentPage !== old.currentPage || current.totalPages !== old.totalPages) {
+            updateView();
+        }
+    });
+
+    // Run once on initial load
+    updateView();
+
+    // --- Astro Lifecycle Hooks for Cleanup ---
+    document.addEventListener('astro:before-swap', unsubscribe);
 </script>

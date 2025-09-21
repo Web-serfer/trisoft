@@ -10,55 +10,23 @@ const allPosts = await getCollection('blog');
 // Сортируем их по дате публикации (от новых к старым)
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Находим "главный" пост. Если его нет, берем самый свежий
-const featuredPost = sortedPosts.find(post => post.data.isFeatured) || sortedPosts[0];
-
-// Остальные посты - это все, кроме главного
-const recentPosts = sortedPosts.filter(post => post.id !== featuredPost.id);
 ---
 
 <Layout title="Блог компании Трисофт" description="Статьи, новости и полезные материалы от экспертов компании Трисофт в области 1С, веб-разработки и IT-аутсорсинга.">
     <main class="bg-white py-12 lg:py-16 section-padding">
-        <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto px-4">
             <!-- Header -->
-            <header class="mb-12 text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight text-neutral-900 md:text-5xl">
-                    Наш Блог
-                </h1>
-                <p class="mt-4 text-lg text-neutral-600">
-                    Новости, инсайты и лучшие практики из мира IT и 1С.
-                </p>
+            <header class="mb-8 text-center">
+                <SectionHeader
+                    title="Наш блог"
+                    subtitle="Оставайтесь в курсе последних новостей и тенденций в IT."
+                    description=""
+                />
             </header>
 
-            <!-- Featured Post -->
-            {featuredPost && (
-                    <section class="mb-16">
-                        <a href={`/blog/${featuredPost.slug}`} class="group block overflow-hidden rounded-3xl border border-neutral-200 shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                            <div class="grid md:grid-cols-2">
-                                <div class="relative h-64 md:h-auto">
-                                    <img src={featuredPost.data.image.src} alt={featuredPost.data.image.alt} class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" width="800" height="600" />
-                                </div>
-                                <div class="flex flex-col justify-center bg-white p-8 md:p-12">
-                                    <span class="mb-3 text-sm font-semibold uppercase tracking-wider text-blue-600">{featuredPost.data.category}</span>
-                                    <h2 class="text-3xl font-bold text-neutral-900">{featuredPost.data.title}</h2>
-                                    <p class="mt-4 text-base text-neutral-600">{featuredPost.data.description}</p>
-                                    <div class="mt-6 text-base font-semibold text-blue-600 group-hover:text-blue-800">
-                                        Читать полностью &rarr;
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </section>
-            )}
-
-            <!-- Recent Posts & Search -->
+            <!-- Posts & Search -->
             <section>
-                <SectionHeader
-                        title="Последние публикации"
-                        subtitle="Оставайтесь в курсе последних новостей и тенденций в IT."
-                        description=""/>
-                <!-- Вся логика поиска и отображения теперь инкапсулирована здесь -->
-                <BlogListContainer posts={recentPosts} />
+                <BlogListContainer posts={sortedPosts} />
             </section>
         </div>
     </main>
